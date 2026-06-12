@@ -51,19 +51,6 @@ ejn-website/
     └── help.html
 ```
 
----
-
-## 🛠️ How to Use Locally
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/es-ratt/ejn-website.git
-   ```
-2. Open `index.html` with **Live Server** (VS Code extension)
-3. Done — no build step needed!
-
----
-
 ## 📬 Contact
 
 Made with 💚 by **Most. Esrat Jhahan Nur**
