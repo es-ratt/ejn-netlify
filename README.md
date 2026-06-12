@@ -1,6 +1,6 @@
 # ejn-website
 An open academic resource hub containing organized notes, study materials, and previous semester questions to make learning more accessible for students.
-# 📚 EJN — Study Notes & Materials
+# EJN — Study Notes & Materials
 
 > Course-wise PDF, syllabus, notes & previous semester questions — all in one place, made for **DIU Software Engineering Students** only.
 
@@ -10,7 +10,7 @@ An open academic resource hub containing organized notes, study materials, and p
 
 ---
 
-## 👩‍💻 About This Project
+## About This Project
 
 This website was built and maintained by **Most. Esrat Jhahan Nur** (SWE-43, Daffodil International University) to help fellow students access organized study materials in one place.
 
@@ -18,22 +18,22 @@ All resources are collected and shared with care — covering course lists, syll
 
 ---
 
-## ✨ Features
+## Features
 
 | Section | Description |
 |--------|-------------|
-| 📋 Course List & Guidelines | Semester-wise course list + academic guidelines for DIU SWE |
-| 📁 Course Materials | Google Drive links for each batch's study materials |
-| 💡 Suggestions & Syllabus | Semester-wise syllabus PDFs |
-| 📝 Notes for Juniors | Mid notes for running batches (251 onwards) |
-| ⭐ Notes for SWE-43 | Updated before Mid & Final exams |
-| 🗂️ Previous Questions | Question papers from Fall 2024 to Spring 2026 |
-| 🙋‍♀️ About | About the creator |
-| 📞 Helpline | Direct contact via WhatsApp, Email & Facebook |
+| Course List & Guidelines | Semester-wise course list + academic guidelines for DIU SWE |
+| Course Materials | Google Drive links for each batch's study materials |
+| Suggestions & Syllabus | Semester-wise syllabus PDFs |
+| Notes for Juniors | Mid notes for running batches (251 onwards) |
+| Notes for SWE-43 | Updated before Mid & Final exams |
+| Previous Questions | Question papers from Fall 2024 to Spring 2026 |
+| About | About the creator |
+| Helpline | Direct contact via WhatsApp, Email & Facebook |
 
 ---
 
-## 🗂️ File Structure
+## File Structure
 
 ```
 ejn-website/
@@ -51,7 +51,7 @@ ejn-website/
     └── help.html
 ```
 
-## 📬 Contact
+## Contact
 
 Made with 💚 by **Most. Esrat Jhahan Nur**
 
