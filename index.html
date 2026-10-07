@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EJN — Study Notes & Materials</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
 </head>
+
 <body>
 
   <!-- Ambient background blobs -->
@@ -27,67 +30,152 @@
   <main class="hero">
     <div class="hero-tag">DIU · Software Engineering</div>
     <h1 class="hero-title">Study Notes<br /><span class="accent">&amp; Materials</span></h1>
-    <p class="hero-by">by <a href="https://www.facebook.com/profile.php?id=61583359276476" target="_blank" class="author-link">@Esrat-Jhahann</a></p>
-    <p class="hero-desc">Course-wise PDF, syllabus, notes &amp; previous semester questions — all in one place, made for DIU Software Engineering Students only. (SWE-43 to running batch)</p>
+    <p class="hero-by">by <a href="https://www.facebook.com/profile.php?id=61583359276476" target="_blank"
+        class="author-link">@Esrat-Jhahann</a></p>
+    <p class="hero-desc">Course-wise PDF, syllabus, notes &amp; exam suggestions - all in one place, made for DIU
+      Software Engineering Students only. (SWE-43 to running batch)</p>
 
-    <!-- Navigation grid -->
+    <!-- Navigation grid — top row (3 sticky-note modules) -->
     <div class="nav-grid">
 
-      <a href="pages/courselist.html" class="nav-card">
+      <a href="pages/courselist.html" class="nav-card note-card">
         <span class="nav-card-title">Course List &amp; Guidelines</span>
         <span class="nav-card-desc">Semester-wise courses &amp; academic guidelines for DIU SWE</span>
         <span class="nav-card-arrow">→</span>
       </a>
 
-      <a href="pages/materials.html" class="nav-card">
+      <a href="pages/materials.html" class="nav-card note-card">
         <span class="nav-card-title">Semester-wise Course Materials</span>
         <span class="nav-card-desc">Drive links for each batch's study materials</span>
         <span class="nav-card-arrow">→</span>
       </a>
 
-      <a href="pages/suggestions.html" class="nav-card">
+      <a href="pages/suggestions.html" class="nav-card note-card">
         <span class="nav-card-title">Semester-wise Suggestions</span>
         <span class="nav-card-desc">Exam suggestions &amp; semester-wise syllabus PDFs</span>
         <span class="nav-card-arrow">→</span>
       </a>
 
-      <a href="pages/notes-juniors.html" class="nav-card">
-        <span class="nav-card-title">Notes (SWE 44 to running batch)</span>
-        <span class="nav-card-desc">Mid &amp; Final notes for running batches</span>
+    </div>
+
+    <!-- Navigation grid — bottom row (2 sticky-note modules, centered) -->
+    <div class="nav-grid nav-grid-bottom">
+
+      <a href="pages/notes-juniors.html" class="nav-card note-card">
+        <span class="nav-card-title">Notes (SWE 251 to running batch)</span>
+        <span class="nav-card-desc">Mid &amp; Final notes - check available courses &amp; get access</span>
         <span class="nav-card-arrow">→</span>
       </a>
 
-      <a href="pages/notes-swe43.html" class="nav-card highlight-card">
-        <span class="nav-card-title">Notes for SWE-43</span>
-        <span class="nav-card-desc">Upcoming — will be uploaded before Mid &amp; Final exams</span>
-        <span class="nav-card-arrow">→</span>
-      </a>
-
-      <a href="pages/prev-questions.html" class="nav-card">
-        <span class="nav-card-title">Previous Semester Questions</span>
-        <span class="nav-card-desc">Question papers from Fall 2024 to the running batch</span>
-        <span class="nav-card-arrow">→</span>
-      </a>
-
-      <a href="pages/about.html" class="nav-card">
-        <span class="nav-card-title">About Me</span>
-        <span class="nav-card-desc">Know the person behind this page</span>
-        <span class="nav-card-arrow">→</span>
-      </a>
-
-      <a href="pages/help.html" class="nav-card">
-        <span class="nav-card-title">Helpline</span>
-        <span class="nav-card-desc">Have a question? Reach out directly</span>
+      <a href="pages/notes-swe43.html" class="nav-card note-card">
+        <span class="nav-card-title">Notes for SWE-242</span>
+        <span class="nav-card-desc">Upcoming - will be uploaded before Mid &amp; Final exams</span>
         <span class="nav-card-arrow">→</span>
       </a>
 
     </div>
+
+    <!-- ============================================================
+         REVIEW SECTION
+         Lets any visitor submit a review, and shows every submitted
+         review publicly below the form. No backend — uses a Google
+         Form + Google Sheet as free storage.
+         ============================================================ -->
+    <section style="margin-top:64px; text-align:left;">
+      <h2 class="subpage-title" style="font-size:1.6rem; text-align:center; margin-bottom:8px;">Reviews</h2>
+      <p class="hero-desc" style="margin-bottom:28px; text-align:center;"></p>
+
+      <!-- Review submission form -->
+      <div class="section-block" style="max-width:480px; margin:0 auto 36px;">
+        <div class="section-block-title">Add your review</div>
+
+        <form id="reviewForm"
+          action="https://docs.google.com/forms/d/e/1FAIpQLSfvwfhpdLjni76LgLdjhGUMofRehMmN7x8dxLN1FR12oQ-Hjg/formResponse"
+          method="POST" target="hidden_iframe" style="display:flex; flex-direction:column; gap:12px;">
+
+          <input type="text" name="entry.1143450833" placeholder="Your name" required
+            style="padding:10px 14px; border-radius:var(--radius-sm); border:1.5px solid var(--border); background:var(--surface); color:var(--text-main); font-family:var(--font-body);" />
+
+          <textarea name="entry.160202514" placeholder="Write your review..." required rows="3"
+            style="padding:10px 14px; border-radius:var(--radius-sm); border:1.5px solid var(--border); background:var(--surface); color:var(--text-main); font-family:var(--font-body); resize:vertical;"></textarea>
+
+          <button type="submit" class="buy-all-btn" style="border:none; cursor:pointer;">Submit review</button>
+        </form>
+
+        <p id="reviewThanks"
+          style="display:none; margin-top:12px; font-size:0.85rem; color:var(--accent); font-weight:700;">Thanks! Your
+          review has been submitted.</p>
+      </div>
+
+      <!-- Public reviews load here automatically -->
+      <div class="review-grid" id="reviewList"></div>
+    </section>
+
   </main>
 
   <footer class="site-footer">
-    <p>Made with care for DIU SWE students · <a href="https://www.facebook.com/profile.php?id=61583359276476" target="_blank">@Esrat-Jhahann</a></p>
+    <p>Made with care for DIU SWE students · <a href="https://www.facebook.com/profile.php?id=61583359276476"
+        target="_blank">@Esrat-Jhahann</a></p>
   </footer>
 
+  <!-- hidden iframe so the review form doesn't navigate away from the page -->
+  <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+
   <script src="script.js"></script>
+
+  <script>
+    // Show "thanks" message after submitting a review
+    document.getElementById('reviewForm').addEventListener('submit', function () {
+      document.getElementById('reviewThanks').style.display = 'block';
+      setTimeout(function () {
+        document.getElementById('reviewForm').reset();
+      }, 600);
+    });
+
+    // Load all public reviews from the published Google Sheet CSV
+    // CSV LINK: replace CSV_LINK below with your published sheet link once you have it
+    // (Settings → File → Share → Publish to web → CSV → copy that link)
+    var CSV_LINK = 'CSV_LINK';
+
+    if (CSV_LINK.indexOf('http') === 0) {
+      fetch(CSV_LINK)
+        .then(function (res) {
+          // Safety check: only proceed if the response actually looks like CSV.
+          // Prevents garbage cards if CSV_LINK ever points to the wrong file
+          // (e.g. style.css or a Google Fonts link) by mistake.
+          var contentType = res.headers.get('content-type') || '';
+          if (contentType.indexOf('csv') === -1 && contentType.indexOf('text/plain') === -1) {
+            throw new Error('CSV_LINK is not returning CSV content — check the link.');
+          }
+          return res.text();
+        })
+        .then(function (csv) {
+          var rows = csv.trim().split('\n').slice(1); // skip header row
+          var list = document.getElementById('reviewList');
+          if (rows.length === 0 || (rows.length === 1 && rows[0] === '')) return;
+
+          rows.reverse().forEach(function (row) {
+            var cols = row.split(',');
+            // Column order: Timestamp, Name, Review — adjust indexes if your sheet differs
+            var name = cols[1] ? cols[1].replace(/"/g, '').trim() : 'Anonymous';
+            var text = cols[2] ? cols[2].replace(/"/g, '').trim() : '';
+            if (!name || !text) return; // skip rows that don't look like real name+review pairs
+
+            var card = document.createElement('div');
+            card.className = 'review-card';
+            card.innerHTML =
+              '<p class="review-quote">"' + text + '"</p>' +
+              '<div class="review-person">' +
+              '<div class="review-avatar">' + name.charAt(0).toUpperCase() + '</div>' +
+              '<div><div class="review-name">' + name + '</div></div>' +
+              '</div>';
+            list.appendChild(card);
+          });
+        })
+        .catch(function (err) { console.warn('Reviews not loaded:', err.message); });
+    }
+  </script>
+
 </body>
+
 </html>

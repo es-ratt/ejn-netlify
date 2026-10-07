@@ -1,315 +1,624 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Notes (SWE 44 to running batch) — EJN</title>
   <link rel="stylesheet" href="../style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <style>
+    .locked-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      padding: 16px;
+    }
+
+    .locked-modal-overlay.active {
+      display: flex;
+    }
+
+    .locked-modal {
+      background: var(--surface, #fff);
+      border: 1.5px solid var(--border, #e2e2e2);
+      border-radius: var(--radius-sm, 12px);
+      padding: 28px 32px;
+      max-width: 320px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+    }
+
+    .locked-modal-icon {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .locked-modal-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--text-main, #111);
+      margin: 0 0 4px;
+      font-family: var(--font-body);
+    }
+
+    .locked-modal-sub {
+      font-size: 0.9rem;
+      color: var(--text-muted, #666);
+      margin: 0 0 18px;
+      font-family: var(--font-body);
+    }
+
+    .locked-modal-close {
+      border: none;
+      cursor: pointer;
+      background: var(--accent, #2563eb);
+      color: #fff;
+      font-weight: 600;
+      padding: 8px 22px;
+      border-radius: var(--radius-sm, 8px);
+      font-family: var(--font-body, inherit);
+    }
+
+    .locked-note {
+      cursor: pointer;
+    }
+  </style>
 </head>
+
 <body>
 
+  <!-- Ambient background blobs -->
   <div class="bg-blob blob-1"></div>
   <div class="bg-blob blob-2"></div>
   <div class="bg-blob blob-3"></div>
 
-  <header class="back-nav">
-    <a href="../index.html" class="back-btn">← Back to Home</a>
+  <!-- Back nav -->
+  <nav class="back-nav">
+    <a href="../index.html" class="back-btn">← Back</a>
     <div class="back-logo">ejn</div>
-  </header>
+  </nav>
 
   <main class="subpage">
+
     <div class="subpage-header">
-      <div class="subpage-tag">Notes</div>
-      <h1 class="subpage-title">Notes<br/><span style="color:var(--accent);">(SWE 44 to running batch)</span></h1>
-      <p class="subpage-desc">Mid and Final Term notes, organized by semester, for SWE-44 and all running batches.</p>
+      <div class="subpage-tag">SWE 44 to running batch</div>
+      <h1 class="subpage-title">Mid &amp; Final Notes</h1>
+      <p class="subpage-desc">Choose Mid or Final, then check which courses are available for your semester. You can buy
+        a single course or the full semester bundle.</p>
     </div>
 
-    <div class="info-box">
-      These notes are shared for junior SWE students (Batch 44 and all running batches). More notes will be added before each exam.
+    <!-- ===== STEP 1: Mid / Final choice ===== -->
+    <div class="term-choice-grid">
+      <div class="term-choice-card" data-term="mid">
+        <div class="term-choice-icon">📘</div>
+        <div class="term-choice-title">Mid Notes</div>
+        <div class="term-choice-sub">Mid-term syllabus notes →</div>
+      </div>
+
+      <div class="term-choice-card" data-term="final">
+        <div class="term-choice-icon">📗</div>
+        <div class="term-choice-title">Final Notes</div>
+        <div class="term-choice-sub">Final-term syllabus notes →</div>
+      </div>
     </div>
 
-    <!-- Mid-Notes & Final-Notes -->
-    <div class="section-block">
-      <div class="accordion">
+    <!-- ============ MID PANEL ============ -->
+    <div class="semester-panel" id="panel-mid">
 
-        <div class="accordion-item">
-          <button class="accordion-trigger">
-            Mid-Notes
-            <span class="accordion-chevron">▼</span>
-          </button>
-          <div class="accordion-body">
-      <div class="drive-list" style="margin-top: 4px;">
-
-        <div class="drive-card">
-          <div class="drive-card-left">
-            <div class="drive-num">01</div>
-            <div>
-              <div class="drive-label">1st Semester — Mid Notes</div>
-            </div>
-          </div>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSejW7pUO3420Hn-CFRK3AMrpWqWtcimG4wOqQKnLNFZq2eI_Q/viewform?usp=publish-editor" target="_blank" class="drive-btn">Open</a>
-        </div>
-
-        <div class="drive-card">
-          <div class="drive-card-left">
-            <div class="drive-num">02</div>
-            <div>
-              <div class="drive-label">2nd Semester — Mid Notes</div>
-            </div>
-          </div>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSejW7pUO3420Hn-CFRK3AMrpWqWtcimG4wOqQKnLNFZq2eI_Q/viewform?usp=publish-editor" target="_blank" class="drive-btn">Open</a>
-        </div>
-
-        <div class="drive-card">
-          <div class="drive-card-left">
-            <div class="drive-num">03</div>
-            <div>
-              <div class="drive-label">3rd Semester — Mid Notes</div>
-            </div>
-          </div>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSejW7pUO3420Hn-CFRK3AMrpWqWtcimG4wOqQKnLNFZq2eI_Q/viewform?usp=publish-editor" target="_blank" class="drive-btn">Open</a>
-        </div>
-
-        <div class="drive-card">
-          <div class="drive-card-left">
-            <div class="drive-num">04</div>
-            <div>
-              <div class="drive-label">4th Semester — Mid Notes</div>
-            </div>
-          </div>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSejW7pUO3420Hn-CFRK3AMrpWqWtcimG4wOqQKnLNFZq2eI_Q/viewform?usp=publish-editor" target="_blank" class="drive-btn">Open</a>
-        </div>
-
-        <div class="drive-card">
-          <div class="drive-card-left">
-            <div class="drive-num">05</div>
-            <div>
-              <div class="drive-label">5th Semester — Mid Notes</div>
-            </div>
-          </div>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSejW7pUO3420Hn-CFRK3AMrpWqWtcimG4wOqQKnLNFZq2eI_Q/viewform?usp=publish-editor" target="_blank" class="drive-btn">Open</a>
-        </div>
-
-        <div class="drive-card">
-          <div class="drive-card-left">
-            <div class="drive-num">06</div>
-            <div>
-              <div class="drive-label">6th Semester — Mid Notes</div>
-            </div>
-          </div>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSejW7pUO3420Hn-CFRK3AMrpWqWtcimG4wOqQKnLNFZq2eI_Q/viewform?usp=publish-editor" target="_blank" class="drive-btn">Open</a>
-        </div>
-
-        <div class="drive-card">
-          <div class="drive-card-left">
-            <div class="drive-num">07</div>
-            <div>
-              <div class="drive-label">7th Semester — Mid Notes</div>
-            </div>
-          </div>
-          <a href="https://drive.google.com/drive/folders/1TgSZPwbxbBFBdav4qWCsFm7pDDgO2m9X?usp=sharing" target="_blank" class="drive-btn">Open</a>
-        </div>
-
-        <div class="drive-card">
-          <div class="drive-card-left">
-            <div class="drive-num">08</div>
-            <div>
-              <div class="drive-label">8th Semester — Mid Notes</div>
-            </div>
-          </div>
-          <a href="https://drive.google.com/drive/folders/1e3aDtMR_C-REL4muMCnlC4cnNv5w6boV?usp=sharing" target="_blank" class="drive-btn">Open</a>
-        </div>
-
-        <div class="drive-card">
-          <div class="drive-card-left">
-            <div class="drive-num">09</div>
-            <div>
-              <div class="drive-label">9th Semester — Mid Notes</div>
-            </div>
-          </div>
-          <a href="https://drive.google.com/drive/folders/1lGmNNMoNWVb1TA6Z6iQ6wx4MAab8nGZA?usp=sharing" target="_blank" class="drive-btn">Open</a>
-        </div>
-
-        <div class="drive-card">
-          <div class="drive-card-left">
-            <div class="drive-num">10</div>
-            <div>
-              <div class="drive-label">10th Semester — Mid Notes</div>
-            </div>
-          </div>
-          <a href="https://drive.google.com/drive/folders/1Nh6xO0QeLLKOKG-85HdUEk13M0NtNtEp?usp=sharing" target="_blank" class="drive-btn">Open</a>
-        </div>
-
-        <div class="drive-card">
-          <div class="drive-card-left">
-            <div class="drive-num">11</div>
-            <div>
-              <div class="drive-label">11th Semester — Mid Notes</div>
-            </div>
-          </div>
-          <a href="https://drive.google.com/drive/folders/1HwTaKznI-F9hUMVjx_ej8rpewt_hrxxl?usp=sharing" target="_blank" class="drive-btn">Open</a>
-        </div>
-
-        <div class="drive-card">
-          <div class="drive-card-left">
-            <div class="drive-num">12</div>
-            <div>
-              <div class="drive-label">12th Semester — Mid Notes</div>
-            </div>
-          </div>
-          <a href="https://drive.google.com/drive/folders/1yRauGrOtnbE46kBwwT72ZLPkW_QX0wdq?usp=sharing" target="_blank" class="drive-btn">Open</a>
-        </div>
-
+      <div class="info-box">
+        You're viewing <strong>Mid-term notes</strong>. Pick a course to buy individually, or grab the full semester
+        bundle.
       </div>
+
+      <div class="semester-grid">
+
+        <!-- Semester 1 -->
+        <div class="semester-card">
+          <div class="semester-card-title">1st Semester</div>
+          <span class="semester-card-tag">3 courses available</span>
+
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-111</span> — Computer Fundamentals</span>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMVyv6Nrcf5DhosYMGw_V4Bf7YZheHgHHVtx6NZZmpp2mMhw/viewform?usp=publish-editor"
+              class="course-buy-btn" target="_blank">Purchase this course only</a>
           </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-113</span> — Introduction to Software
+              Engineering</span>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMVyv6Nrcf5DhosYMGw_V4Bf7YZheHgHHVtx6NZZmpp2mMhw/viewform?usp=publish-editor"
+              class="course-buy-btn" target="_blank">Purchase this course only</a>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">BNS-101</span> — Bangladesh Studies</span>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMVyv6Nrcf5DhosYMGw_V4Bf7YZheHgHHVtx6NZZmpp2mMhw/viewform?usp=publish-editor"
+              class="course-buy-btn" target="_blank">Purchase this course only</a>
+          </div>
+
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSejW7pUO3420Hn-CFRK3AMrpWqWtcimG4wOqQKnLNFZq2eI_Q/viewform?usp=dialog"
+            class="buy-all-btn" target="_blank">Purchase all available courses for this semester</a>
         </div>
 
-        <div class="accordion-item">
-          <button class="accordion-trigger">
-            Final-Notes
-            <span class="accordion-chevron">▼</span>
-          </button>
-          <div class="accordion-body">
-      <div class="drive-list" style="margin-top: 4px;">
+        <!-- Semester 2 -->
+        <div class="semester-card">
+          <div class="semester-card-title">2nd Semester</div>
+          <span class="semester-card-tag">2 courses available</span>
 
-        <div class="drive-card">
-          <div class="drive-card-left">
-            <div class="drive-num">01</div>
-            <div>
-              <div class="drive-label">1st Semester — Final Notes</div>
-            </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">MAT-101</span> — Math-I: Calculus &amp; Geometry</span>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMVyv6Nrcf5DhosYMGw_V4Bf7YZheHgHHVtx6NZZmpp2mMhw/viewform?usp=publish-editor"
+              class="course-buy-btn" target="_blank">Purchase this course only</a>
           </div>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSejW7pUO3420Hn-CFRK3AMrpWqWtcimG4wOqQKnLNFZq2eI_Q/viewform?usp=publish-editor" target="_blank" class="drive-btn">Open</a>
+
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">PHY-101</span> — Physics: Mechanics, Electromagnetism
+              &amp; Waves</span>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMVyv6Nrcf5DhosYMGw_V4Bf7YZheHgHHVtx6NZZmpp2mMhw/viewform?usp=publish-editor"
+              class="course-buy-btn" target="_blank">Purchase this course only</a>
+          </div>
+
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSejW7pUO3420Hn-CFRK3AMrpWqWtcimG4wOqQKnLNFZq2eI_Q/viewform?usp=dialog"
+            class="buy-all-btn" target="_blank">Purchase all available courses for this semester</a>
         </div>
 
-        <div class="drive-card">
-          <div class="drive-card-left">
-            <div class="drive-num">02</div>
-            <div>
-              <div class="drive-label">2nd Semester — Final Notes</div>
-            </div>
+        <!-- Semester 3 -->
+        <div class="semester-card">
+          <div class="semester-card-title">3rd Semester</div>
+          <span class="semester-card-tag">4 courses available</span>
+
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-213</span> — Digital Electronics &amp; Logic
+              Design</span>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMVyv6Nrcf5DhosYMGw_V4Bf7YZheHgHHVtx6NZZmpp2mMhw/viewform?usp=publish-editor"
+              class="course-buy-btn" target="_blank">Purchase this course only</a>
           </div>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSejW7pUO3420Hn-CFRK3AMrpWqWtcimG4wOqQKnLNFZq2eI_Q/viewform?usp=publish-editor" target="_blank" class="drive-btn">Open</a>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-123</span> — Discrete Mathematics</span>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMVyv6Nrcf5DhosYMGw_V4Bf7YZheHgHHVtx6NZZmpp2mMhw/viewform?usp=publish-editor"
+              class="course-buy-btn" target="_blank">Purchase this course only</a>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">MAT-102</span> — Math-II: Linear Algebra &amp; Fourier
+              Analysis</span>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMVyv6Nrcf5DhosYMGw_V4Bf7YZheHgHHVtx6NZZmpp2mMhw/viewform?usp=publish-editor"
+              class="course-buy-btn" target="_blank">Purchase this course only</a>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-131</span> — Data Structure</span>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMVyv6Nrcf5DhosYMGw_V4Bf7YZheHgHHVtx6NZZmpp2mMhw/viewform?usp=publish-editor"
+              class="course-buy-btn" target="_blank">Purchase this course only</a>
+          </div>
+
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSejW7pUO3420Hn-CFRK3AMrpWqWtcimG4wOqQKnLNFZq2eI_Q/viewform?usp=dialog"
+            class="buy-all-btn" target="_blank">Purchase all available courses for this semester</a>
         </div>
 
-        <div class="drive-card">
-          <div class="drive-card-left">
-            <div class="drive-num">03</div>
-            <div>
-              <div class="drive-label">3rd Semester — Final Notes</div>
-            </div>
+        <!-- Semester 4 -->
+        <div class="semester-card">
+          <div class="semester-card-title">4th Semester</div>
+          <span class="semester-card-tag">4 courses available</span>
+
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-133</span> — Software Development Capstone
+              Project</span>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMVyv6Nrcf5DhosYMGw_V4Bf7YZheHgHHVtx6NZZmpp2mMhw/viewform?usp=publish-editor"
+              class="course-buy-btn" target="_blank">Purchase this course only</a>
           </div>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSejW7pUO3420Hn-CFRK3AMrpWqWtcimG4wOqQKnLNFZq2eI_Q/viewform?usp=publish-editor" target="_blank" class="drive-btn">Open</a>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-223</span> — Database Systems</span>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMVyv6Nrcf5DhosYMGw_V4Bf7YZheHgHHVtx6NZZmpp2mMhw/viewform?usp=publish-editor"
+              class="course-buy-btn" target="_blank">Purchase this course only</a>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-222</span> — Computer Architecture</span>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMVyv6Nrcf5DhosYMGw_V4Bf7YZheHgHHVtx6NZZmpp2mMhw/viewform?usp=publish-editor"
+              class="course-buy-btn" target="_blank">Purchase this course only</a>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">AOL-101</span> — Art of Living</span>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMVyv6Nrcf5DhosYMGw_V4Bf7YZheHgHHVtx6NZZmpp2mMhw/viewform?usp=publish-editor"
+              class="course-buy-btn" target="_blank">Purchase this course only</a>
+          </div>
+
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSejW7pUO3420Hn-CFRK3AMrpWqWtcimG4wOqQKnLNFZq2eI_Q/viewform?usp=dialog"
+            class="buy-all-btn" target="_blank">Purchase all available courses for this semester</a>
         </div>
 
-        <div class="drive-card">
-          <div class="drive-card-left">
-            <div class="drive-num">04</div>
-            <div>
-              <div class="drive-label">4th Semester — Final Notes</div>
-            </div>
+        <!-- Semester 5 -->
+        <div class="semester-card">
+          <div class="semester-card-title">5th Semester</div>
+          <span class="semester-card-tag">3 courses available</span>
+
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">STA-135 / STA-101</span> — Probability &amp; Statistics
+              in Software Engineering</span>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMVyv6Nrcf5DhosYMGw_V4Bf7YZheHgHHVtx6NZZmpp2mMhw/viewform?usp=publish-editor"
+              class="course-buy-btn" target="_blank">Purchase this course only</a>
           </div>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSejW7pUO3420Hn-CFRK3AMrpWqWtcimG4wOqQKnLNFZq2eI_Q/viewform?usp=publish-editor" target="_blank" class="drive-btn">Open</a>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-214</span> — Algorithms Design &amp; Analysis</span>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMVyv6Nrcf5DhosYMGw_V4Bf7YZheHgHHVtx6NZZmpp2mMhw/viewform?usp=publish-editor"
+              class="course-buy-btn" target="_blank">Purchase this course only</a>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-216</span> — Object Oriented Programming</span>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMVyv6Nrcf5DhosYMGw_V4Bf7YZheHgHHVtx6NZZmpp2mMhw/viewform?usp=publish-editor"
+              class="course-buy-btn" target="_blank">Purchase this course only</a>
+          </div>
+
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSejW7pUO3420Hn-CFRK3AMrpWqWtcimG4wOqQKnLNFZq2eI_Q/viewform?usp=dialog"
+            class="buy-all-btn" target="_blank">Purchase all available courses for this semester</a>
         </div>
 
-        <div class="drive-card">
-          <div class="drive-card-left">
-            <div class="drive-num">05</div>
-            <div>
-              <div class="drive-label">5th Semester — Final Notes</div>
-            </div>
+        <!-- Semester 6 -->
+        <div class="semester-card">
+          <div class="semester-card-title">6th Semester</div>
+          <span class="semester-card-tag">4 courses available</span>
+
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">STA-135 / STA-101</span> — Probability &amp; Statistics
+              in Software Engineering</span>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMVyv6Nrcf5DhosYMGw_V4Bf7YZheHgHHVtx6NZZmpp2mMhw/viewform?usp=publish-editor"
+              class="course-buy-btn" target="_blank">Purchase this course only</a>
           </div>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSejW7pUO3420Hn-CFRK3AMrpWqWtcimG4wOqQKnLNFZq2eI_Q/viewform?usp=publish-editor" target="_blank" class="drive-btn">Open</a>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-232</span> — Operating System &amp; System
+              Programming</span>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMVyv6Nrcf5DhosYMGw_V4Bf7YZheHgHHVtx6NZZmpp2mMhw/viewform?usp=publish-editor"
+              class="course-buy-btn" target="_blank">Purchase this course only</a>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-231</span> — System Analysis &amp; Design Capstone
+              Project</span>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMVyv6Nrcf5DhosYMGw_V4Bf7YZheHgHHVtx6NZZmpp2mMhw/viewform?usp=publish-editor"
+              class="course-buy-btn" target="_blank">Purchase this course only</a>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-235</span> — Desktop &amp; Web Programming</span>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMVyv6Nrcf5DhosYMGw_V4Bf7YZheHgHHVtx6NZZmpp2mMhw/viewform?usp=publish-editor"
+              class="course-buy-btn" target="_blank">Purchase this course only</a>
+          </div>
+
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSejW7pUO3420Hn-CFRK3AMrpWqWtcimG4wOqQKnLNFZq2eI_Q/viewform?usp=dialog"
+            class="buy-all-btn" target="_blank">Purchase all available courses for this semester</a>
         </div>
 
-        <div class="drive-card">
-          <div class="drive-card-left">
-            <div class="drive-num">06</div>
-            <div>
-              <div class="drive-label">6th Semester — Final Notes</div>
-            </div>
-          </div>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSejW7pUO3420Hn-CFRK3AMrpWqWtcimG4wOqQKnLNFZq2eI_Q/viewform?usp=publish-editor" target="_blank" class="drive-btn">Open</a>
-        </div>
-
-        <div class="drive-card">
-          <div class="drive-card-left">
-            <div class="drive-num">07</div>
-            <div>
-              <div class="drive-label">7th Semester — Final Notes</div>
-            </div>
-          </div>
-          <a href="https://drive.google.com/drive/folders/11eOknemMczo6iJ3IkhQcQU2YJm1V9A8a?usp=sharing" target="_blank" class="drive-btn">Open</a>
-        </div>
-
-        <div class="drive-card">
-          <div class="drive-card-left">
-            <div class="drive-num">08</div>
-            <div>
-              <div class="drive-label">8th Semester — Final Notes</div>
-            </div>
-          </div>
-          <a href="https://drive.google.com/drive/folders/1RIPjHbzb_4Pz6hWNsVLoEXNfbGl7DM_h?usp=sharing" target="_blank" class="drive-btn">Open</a>
-        </div>
-
-        <div class="drive-card">
-          <div class="drive-card-left">
-            <div class="drive-num">09</div>
-            <div>
-              <div class="drive-label">9th Semester — Final Notes</div>
-            </div>
-          </div>
-          <a href="https://drive.google.com/drive/folders/1Emim8XI-Jjzh3wWQo_vucPeDDbVnrBa8?usp=sharing" target="_blank" class="drive-btn">Open</a>
-        </div>
-
-        <div class="drive-card">
-          <div class="drive-card-left">
-            <div class="drive-num">10</div>
-            <div>
-              <div class="drive-label">10th Semester — Final Notes</div>
-            </div>
-          </div>
-          <a href="https://drive.google.com/drive/folders/1B0PL7MKt5iaK8lvrnwP1ofW7T_vwrtQl?usp=sharing" target="_blank" class="drive-btn">Open</a>
-        </div>
-
-        <div class="drive-card">
-          <div class="drive-card-left">
-            <div class="drive-num">11</div>
-            <div>
-              <div class="drive-label">11th Semester — Final Notes</div>
-            </div>
-          </div>
-          <a href="https://drive.google.com/drive/folders/15WcWFMJlqAoVxNaW6feEsdzPPWdp_1eZ?usp=sharing" target="_blank" class="drive-btn">Open</a>
-        </div>
-
-        <div class="drive-card">
-          <div class="drive-card-left">
-            <div class="drive-num">12</div>
-            <div>
-              <div class="drive-label">12th Semester — Final Notes</div>
-            </div>
-          </div>
-          <a href="https://drive.google.com/drive/folders/1UX_5dKTDrWEXsw-yyUQpUrwwvVG0-5Sz?usp=sharing" target="_blank" class="drive-btn">Open</a>
-        </div>
-
-      </div>
-          </div>
+        <!-- Semester 7-12 — coming soon -->
+        <div class="semester-card coming-soon">
+          <div class="semester-card-title">7th – 12th Semester</div>
+          <span class="semester-card-tag soon">Coming soon</span>
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-top:8px;">Notes for these semesters will be added
+            soon. Check back later.</p>
         </div>
 
       </div>
     </div>
 
-    <div class="info-box">
-      Note: Notes cannot be downloaded. Please view them as read-only, directly through the Drive links provided on this website.
+    <!-- ============ FINAL PANEL ============ -->
+    <div class="semester-panel" id="panel-final">
+
+      <div class="info-box">
+        You're viewing <strong>Final-term notes</strong>. Pick a course to buy individually, or grab the full semester
+        bundle.
+      </div>
+
+      <div class="semester-grid">
+
+        <!-- Semester 1 (ENG-101 available only in Final) -->
+        <div class="semester-card">
+          <div class="semester-card-title">1st Semester</div>
+          <span class="semester-card-tag">4 courses available</span>
+
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-111</span> — Computer Fundamentals</span>
+            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-113</span> — Introduction to Software
+              Engineering</span>
+            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">ENG-101</span> — English Reading, Writing Skills &amp;
+              Public Speaking</span>
+            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">BNS-101</span> — Bangladesh Studies</span>
+            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+          </div>
+
+          <a href="javascript:void(0)" class="buy-all-btn locked-note">Purchase all available courses for this
+            semester</a>
+        </div>
+
+        <!-- Semester 2 -->
+        <div class="semester-card">
+          <div class="semester-card-title">2nd Semester</div>
+          <span class="semester-card-tag">3 courses available</span>
+
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">MAT-101</span> — Math-I: Calculus &amp; Geometry</span>
+            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-121</span> — Structured Programming</span>
+            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">PHY-101</span> — Physics: Mechanics, Electromagnetism
+              &amp; Waves</span>
+            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+          </div>
+
+          <a href="javascript:void(0)" class="buy-all-btn locked-note">Purchase all available courses for this
+            semester</a>
+        </div>
+
+        <!-- Semester 3 -->
+        <div class="semester-card">
+          <div class="semester-card-title">3rd Semester</div>
+          <span class="semester-card-tag">4 courses available</span>
+
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-213</span> — Digital Electronics &amp; Logic
+              Design</span>
+            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-123</span> — Discrete Mathematics</span>
+            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">MAT-102</span> — Math-II: Linear Algebra &amp; Fourier
+              Analysis</span>
+            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-131</span> — Data Structure</span>
+            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+          </div>
+
+          <a href="javascript:void(0)" class="buy-all-btn locked-note">Purchase all available courses for this
+            semester</a>
+        </div>
+
+        <!-- Semester 4 -->
+        <div class="semester-card">
+          <div class="semester-card-title">4th Semester</div>
+          <span class="semester-card-tag">4 courses available</span>
+
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-133</span> — Software Development Capstone
+              Project</span>
+            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-223</span> — Database Systems</span>
+            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-222</span> — Computer Architecture</span>
+            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">AOL-101</span> — Art of Living</span>
+            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+          </div>
+
+          <a href="javascript:void(0)" class="buy-all-btn locked-note">Purchase all available courses for this
+            semester</a>
+        </div>
+
+        <!-- Semester 5 -->
+        <div class="semester-card">
+          <div class="semester-card-title">5th Semester</div>
+          <span class="semester-card-tag">3 courses available</span>
+
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">STA-135 / STA-101</span> — Probability &amp; Statistics
+              in Software Engineering</span>
+            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-214</span> — Algorithms Design &amp; Analysis</span>
+            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-216</span> — Object Oriented Programming</span>
+            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+          </div>
+
+          <a href="javascript:void(0)" class="buy-all-btn locked-note">Purchase all available courses for this
+            semester</a>
+        </div>
+
+        <!-- Semester 6 -->
+        <div class="semester-card">
+          <div class="semester-card-title">6th Semester</div>
+          <span class="semester-card-tag">4 courses available</span>
+
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">STA-135 / STA-101</span> — Probability &amp; Statistics
+              in Software Engineering</span>
+            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-232</span> — Operating System &amp; System
+              Programming</span>
+            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-231</span> — System Analysis &amp; Design Capstone
+              Project</span>
+            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-235</span> — Desktop &amp; Web Programming</span>
+            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+          </div>
+
+          <a href="javascript:void(0)" class="buy-all-btn locked-note">Purchase all available courses for this
+            semester</a>
+        </div>
+
+        <!-- Semester 7-12 — coming soon -->
+        <div class="semester-card coming-soon">
+          <div class="semester-card-title">7th – 12th Semester</div>
+          <span class="semester-card-tag soon">Coming soon</span>
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-top:8px;">Notes for these semesters will be added
+            soon. Check back later.</p>
+        </div>
+
+      </div>
     </div>
+
+    <!-- ============================================================
+         MISSING COURSE REQUEST + NEED A TUTOR (shared, always visible)
+         ============================================================ -->
+    <section style="margin-top:48px;">
+      <div class="request-grid">
+
+        <!-- Missing Course Request -->
+        <div class="section-block request-card">
+          <div class="section-block-title">Can't find your course?</div>
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:16px;">Tell me which course you need and
+            why - I'll try to add it.</p>
+
+          <form id="missingCourseForm"
+            action="https://docs.google.com/forms/d/e/1FAIpQLSfjFtOK_F338sW6e2e6yRyWOgRAcIfEcCP0Pn9r2RcGsvklZg/formResponse"
+            method="POST" target="hidden_iframe" class="request-form">
+
+            <input type="text" name="entry.560950120" placeholder="Which course do you need? (code + name)" required
+              style="padding:10px 14px; border-radius:var(--radius-sm); border:1.5px solid var(--border); background:var(--surface); color:var(--text-main); font-family:var(--font-body);" />
+
+            <textarea name="entry.1934792683" placeholder="Why do you need it?" required rows="3"
+              style="padding:10px 14px; border-radius:var(--radius-sm); border:1.5px solid var(--border); background:var(--surface); color:var(--text-main); font-family:var(--font-body); resize:vertical; flex:1;"></textarea>
+
+            <button type="submit" class="buy-all-btn" style="border:none; cursor:pointer; margin-top:auto;">Submit
+              request</button>
+          </form>
+          <p id="missingCourseThanks"
+            style="display:none; margin-top:12px; font-size:0.85rem; color:var(--accent); font-weight:700;">Thanks! Your
+            request has been sent.</p>
+        </div>
+
+        <!-- Need a Tutor (I teach this myself) -->
+        <div class="section-block request-card">
+          <div class="section-block-title">Need a tutor?</div>
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:16px;">Fill this out and I'll reach out to
+            you directly.</p>
+
+          <form id="tutorForm"
+            action="https://docs.google.com/forms/d/e/1FAIpQLSdbGALTbgts3LVavO1AD1rdikba-st62jbB5FegJPZ56DVTuQ/formResponse"
+            method="POST" target="hidden_iframe" class="request-form">
+
+            <input type="text" name="entry.256195603" placeholder="Your name" required
+              style="padding:10px 14px; border-radius:var(--radius-sm); border:1.5px solid var(--border); background:var(--surface); color:var(--text-main); font-family:var(--font-body);" />
+
+            <input type="text" name="entry.1468396561" placeholder="Which course do you need a tutor for?" required
+              style="padding:10px 14px; border-radius:var(--radius-sm); border:1.5px solid var(--border); background:var(--surface); color:var(--text-main); font-family:var(--font-body);" />
+
+            <button type="submit" class="buy-all-btn" style="border:none; cursor:pointer; margin-top:auto;">Submit
+              request</button>
+          </form>
+          <p id="tutorThanks"
+            style="display:none; margin-top:12px; font-size:0.85rem; color:var(--accent); font-weight:700;">Thanks! Your
+            request has been sent.</p>
+        </div>
+
+      </div>
+    </section>
 
   </main>
 
+  <!-- Locked notice modal (Final panel purchase buttons) -->
+  <div class="locked-modal-overlay" id="lockedModalOverlay">
+    <div class="locked-modal">
+      <div class="locked-modal-icon">⏳</div>
+      <p class="locked-modal-title">Come again after mid.</p>
+      <p class="locked-modal-sub">Thank you 🙏</p>
+      <button class="locked-modal-close" id="lockedModalClose">OK</button>
+    </div>
+  </div>
+
   <footer class="site-footer">
-    <p>Made with care for DIU SWE students · <a href="https://www.facebook.com/profile.php?id=61583359276476" target="_blank">@Esrat-Jhahann</a></p>
+    <p>Made with care for DIU SWE students · <a href="https://www.facebook.com/profile.php?id=61583359276476"
+        target="_blank">@Esrat-Jhahann</a></p>
   </footer>
 
+  <!-- hidden iframe so both request forms submit without leaving the page -->
+  <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+
   <script src="../script.js"></script>
+
+  <!-- Mid / Final toggle logic -->
+  <script>
+    document.querySelectorAll('.term-choice-card').forEach(function (card) {
+      card.addEventListener('click', function () {
+        var term = card.dataset.term;
+
+        document.querySelectorAll('.term-choice-card').forEach(function (c) {
+          c.classList.remove('active');
+        });
+        card.classList.add('active');
+
+        document.querySelectorAll('.semester-panel').forEach(function (p) {
+          p.classList.remove('active');
+        });
+        document.getElementById('panel-' + term).classList.add('active');
+
+        document.getElementById('panel-' + term).scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  </script>
+
+  <!-- Missing course + tutor request thank-you messages -->
+  <script>
+    document.getElementById('missingCourseForm').addEventListener('submit', function () {
+      document.getElementById('missingCourseThanks').style.display = 'block';
+      setTimeout(function () {
+        document.getElementById('missingCourseForm').reset();
+      }, 600);
+    });
+
+    document.getElementById('tutorForm').addEventListener('submit', function () {
+      document.getElementById('tutorThanks').style.display = 'block';
+      setTimeout(function () {
+        document.getElementById('tutorForm').reset();
+      }, 600);
+    });
+  </script>
+
+  <!-- Final-panel purchase buttons: show "come again after mid" instead of opening the form -->
+  <script>
+    // capture phase (true) = runs BEFORE any click handler script.js may have
+    // attached to these buttons, and stopImmediatePropagation blocks script.js's
+    // handler from running afterwards — this prevents any old logic in script.js
+    // from hijacking the click on some buttons and not others.
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest('.locked-note');
+      if (!btn) return;
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      document.getElementById('lockedModalOverlay').classList.add('active');
+    }, true);
+
+    document.getElementById('lockedModalClose').addEventListener('click', function () {
+      document.getElementById('lockedModalOverlay').classList.remove('active');
+    });
+    document.getElementById('lockedModalOverlay').addEventListener('click', function (e) {
+      if (e.target === this) this.classList.remove('active');
+    });
+  </script>
+
 </body>
+
 </html>
