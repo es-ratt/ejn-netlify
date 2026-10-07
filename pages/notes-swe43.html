@@ -9,6 +9,48 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,600..900;1,9..144,600..900&display=swap"
     rel="stylesheet" />
+  <style>
+    .search-wrap { position: relative; margin-bottom: 14px; }
+    .search-input {
+      width: 100%; padding: 14px 44px 14px 18px; font-size: 0.95rem;
+      font-family: var(--font-body); color: var(--text-main);
+      background: var(--surface); border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm); outline: none; transition: border-color 0.2s;
+    }
+    .search-input:focus { border-color: var(--accent); }
+    .search-clear {
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      display: none; border: none; background: none; cursor: pointer;
+      font-size: 1.2rem; line-height: 1; color: var(--text-muted);
+    }
+    .sr-wrap { display: none; margin-bottom: 22px; }
+    .sr-meta { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 10px; }
+    .sr-card {
+      background: var(--surface); border: 1.5px solid var(--border);
+      border-radius: var(--radius); padding: 20px 22px; margin-bottom: 12px;
+    }
+    .sr-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
+    .sr-title { font-weight: 700; font-size: 1rem; color: var(--text-main); }
+    .sr-code { font-size: 0.78rem; font-weight: 700; color: var(--accent); margin-top: 2px; }
+    .sr-badge {
+      display: inline-flex; align-items: center; padding: 8px 18px; border-radius: 100px;
+      font-size: 0.82rem; font-weight: 700; white-space: nowrap;
+      background: var(--surface2); color: var(--text-muted); border: 1.5px solid var(--border);
+      transition: background var(--transition), color var(--transition), border-color var(--transition);
+    }
+    .sr-badge.on { background: var(--highlight); color: var(--accent); border-color: rgba(22,163,74,0.3); }
+    .sr-badge.on:hover { background: var(--accent); color: #FFFFFF; border-color: var(--accent); }
+    .sr-term {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--text-muted); margin: 14px 0 6px;
+    }
+    .sr-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 5px; }
+    .sr-list li { font-size: 0.9rem; color: var(--text-main); padding-left: 16px; position: relative; }
+    .sr-list li::before { content: '·'; color: var(--accent); font-weight: 700; position: absolute; left: 4px; }
+    .sr-empty { font-size: 0.85rem; color: var(--text-muted); }
+    .sr-hint { margin-top: 14px; font-size: 0.9rem; line-height: 1.7; color: var(--text-muted); }
+    .sr-hint strong { color: var(--accent); }
+  </style>
 </head>
 
 <body>
@@ -28,6 +70,15 @@
       <h1 class="subpage-title">Notes for<br /><span style="color:var(--accent);">SWE-43</span></h1>
     </div>
 
+    <!-- Live search: shows what is available in each course -->
+    <div class="search-wrap">
+      <input type="text" id="courseSearch" class="search-input"
+        placeholder="Search a course to see what's available (e.g. networking, SQA, business)" autocomplete="off"
+        aria-label="Search courses" />
+      <button type="button" id="searchClear" class="search-clear" aria-label="Clear search">×</button>
+    </div>
+    <div class="sr-wrap" id="searchResults"></div>
+
     <!-- Semester: Summer 2026 -->
     <div class="section-block">
       <div class="section-block-title">Semester - Fall 2026</div>
@@ -40,10 +91,9 @@
           </button>
           <div class="accordion-body">
             <p style="margin-bottom:12px; font-size:0.9rem; line-height:1.7; color:var(--text-muted);"><strong
-                style="color:var(--accent);">Note:</strong> Before collecting notes, check the <a
-                href="https://www.facebook.com/profile.php?id=61583359276476" target="_blank" rel="noopener noreferrer"
-                style="color:var(--accent);font-weight:700;">@Esrat-Jhahann</a> page to see whether the notes are
-              available. Make sure they are, then purchase the notes, to avoid any misunderstanding.</p>
+                style="color:var(--accent);">Note:</strong> Before collecting your notes, please search for your course
+              using the search bar and carefully select the notes you need. This will help avoid any confusion or
+              misunderstanding.</p>
             <div class="drive-list" style="margin-top: 4px;">
 
               <div class="drive-card">
@@ -79,7 +129,7 @@
               <div class="drive-card">
                 <div class="drive-card-left">
                   <div>
-                    <div class="drive-label">Design Patter</div>
+                    <div class="drive-label">Design Pattern</div>
                   </div>
                 </div>
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLScsG6sl5SE215tSCPEcabgTcLVzYoaWMo0zQUa7mzRMaLa6AA/viewform?usp=dialog"
@@ -97,10 +147,9 @@
           </button>
           <div class="accordion-body">
             <p style="margin-bottom:12px; font-size:0.9rem; line-height:1.7; color:var(--text-muted);"><strong
-                style="color:var(--accent);">Note:</strong> Before collecting notes, check the <a
-                href="https://www.facebook.com/profile.php?id=61583359276476" target="_blank" rel="noopener noreferrer"
-                style="color:var(--accent);font-weight:700;">@Esrat-Jhahann</a> page to see whether the notes are
-              available. Make sure they are, then purchase the notes, to avoid any misunderstanding.</p>
+                style="color:var(--accent);">Note:</strong> Before collecting your notes, please search for your course
+              using the search bar and carefully select the notes you need. This will help avoid any confusion or
+              misunderstanding.</p>
             <p style="margin-bottom:8px;">Will be uploaded 1 week before the Final exam — stay tuned to this page for
               updates.</p>
             <div class="drive-list" style="margin-top: 4px;">
@@ -138,7 +187,7 @@
               <div class="drive-card">
                 <div class="drive-card-left">
                   <div>
-                    <div class="drive-label">Design Patter</div>
+                    <div class="drive-label">Design Pattern</div>
                   </div>
                 </div>
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLScsG6sl5SE215tSCPEcabgTcLVzYoaWMo0zQUa7mzRMaLa6AA/viewform?usp=dialog"
@@ -180,6 +229,133 @@
   </footer>
 
   <script src="../script.js"></script>
+
+  <script>
+    (function () {
+
+      // =====================================================================
+      //  EDIT HERE: only this part changes when you upload new notes.
+      //
+      //  mid   = notes available right now for Mid
+      //  final = notes available right now for Final
+      //  Add a note  -> put a new text inside [ ] , separated by commas
+      //  Example     -> mid: ['Chapter 1 Notes', 'Chapter 2 Notes']
+      //  Nothing yet -> leave it empty like this: []
+      //  keywords    = extra words people can type to find the course
+      // =====================================================================
+      var COURSES = [
+        {
+          name: 'Data Communication & Computer Networking',
+          code: 'SE-225',
+          keywords: 'dccn dcn cn networking network',
+          mid: ['Chapter 1 Notes'],
+          final: []
+        },
+        {
+          name: 'Software Quality Assurance & Testing',
+          code: 'SE-312',
+          keywords: 'sqa qa testing',
+          mid: ['Chapter 1 Notes'],
+          final: []
+        },
+        {
+          name: 'Business Analysis & Communication',
+          code: 'GE-324',
+          keywords: 'bac ba business',
+          mid: ['Chapter 1 Notes'],
+          final: []
+        },
+        {
+          name: 'Design Pattern',
+          code: 'SE-311',
+          keywords: 'dp patterns',
+          mid: [],
+          final: []
+        }
+      ];
+
+      // =====================================================================
+      //  Below this line: search logic (no need to touch)
+      // =====================================================================
+      var input = document.getElementById('courseSearch');
+      var clearBtn = document.getElementById('searchClear');
+      var out = document.getElementById('searchResults');
+
+      function el(tag, cls, text) {
+        var e = document.createElement(tag);
+        if (cls) e.className = cls;
+        if (text !== undefined) e.textContent = text;
+        return e;
+      }
+
+      function haystack(c) {
+        return [c.name, c.code, c.keywords].concat(c.mid, c.final).join(' ').toLowerCase();
+      }
+
+      function block(label, notes) {
+        var wrap = el('div');
+        wrap.appendChild(el('div', 'sr-term', label));
+        if (notes.length === 0) {
+          wrap.appendChild(el('div', 'sr-empty', 'Nothing uploaded yet'));
+        } else {
+          var ul = el('ul', 'sr-list');
+          notes.forEach(function (n) { ul.appendChild(el('li', '', n)); });
+          wrap.appendChild(ul);
+        }
+        return wrap;
+      }
+
+      function card(c) {
+        var count = c.mid.length + c.final.length;
+        var box = el('div', 'sr-card');
+        var head = el('div', 'sr-head');
+        var left = el('div');
+        left.appendChild(el('div', 'sr-title', c.name));
+        left.appendChild(el('div', 'sr-code', c.code));
+        head.appendChild(left);
+        head.appendChild(el('span', 'sr-badge' + (count ? ' on' : ''),
+          count ? count + (count === 1 ? ' note available' : ' notes available') : 'Coming soon'));
+        box.appendChild(head);
+        box.appendChild(block('Mid Notes', c.mid));
+        box.appendChild(block('Final Notes', c.final));
+        return box;
+      }
+
+      function run() {
+        var q = input.value.trim().toLowerCase();
+        var words = q ? q.split(/\s+/) : [];
+        clearBtn.style.display = q ? 'block' : 'none';
+        out.innerHTML = '';
+
+        if (!q) { out.style.display = 'none'; return; }
+        out.style.display = 'block';
+
+        var shown = COURSES.filter(function (c) {
+          var h = haystack(c);
+          return words.every(function (w) { return h.indexOf(w) !== -1; });
+        });
+
+        if (shown.length === 0) {
+          out.appendChild(el('div', 'sr-meta', 'No course found. Try a different keyword.'));
+          return;
+        }
+
+        out.appendChild(el('div', 'sr-meta', shown.length + (shown.length === 1 ? ' course' : ' courses') + ' found'));
+        shown.forEach(function (c) { out.appendChild(card(c)); });
+
+        var hint = el('p', 'sr-hint');
+        hint.appendChild(el('strong', '', 'Note:'));
+        hint.appendChild(document.createTextNode(' Can’t find all the notes for this course? Don’t worry! If you purchase the notes, all the required notes will be uploaded to the Drive before the exam. To purchase the notes, check the Mid / Final Notes list below.'));
+        out.appendChild(hint);
+      }
+
+      input.addEventListener('input', run);
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') { input.value = ''; run(); }
+      });
+      clearBtn.addEventListener('click', function () { input.value = ''; run(); input.focus(); });
+    })();
+  </script>
 </body>
 
 </html>
