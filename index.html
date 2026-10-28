@@ -77,8 +77,8 @@
 
     <!-- ============================================================
          REVIEW SECTION
-         Visitors submit a review via Google Form; all reviews are
-         shown publicly below from the published Google Sheet CSV.
+         Visitors submit a review via Google Form. Only reviews marked
+         "yes" in the Approved column (E) of the Sheet are shown.
          ============================================================ -->
     <section style="margin-top:64px; text-align:left;">
       <h2 class="subpage-title" style="font-size:1.6rem; text-align:center; margin-bottom:8px;">Reviews</h2>
@@ -103,10 +103,10 @@
 
         <p id="reviewThanks"
           style="display:none; margin-top:12px; font-size:0.85rem; color:var(--accent); font-weight:700;">Thanks! Your
-          review has been submitted.</p>
+          review has been submitted and will appear after approval.</p>
       </div>
 
-      <!-- Public reviews load here automatically -->
+      <!-- Approved reviews load here automatically -->
       <div class="review-grid" id="reviewList"></div>
     </section>
 
@@ -168,9 +168,12 @@
           var list = document.getElementById('reviewList');
 
           rows.reverse().forEach(function (cols) {
-            // Column order: Timestamp, Name, Review
+            // Column order: Timestamp, Name, Review, Email Address, Approved
             var name = cols[1] ? cols[1].trim() : '';
             var text = cols[2] ? cols[2].trim() : '';
+            var approved = cols[4] ? cols[4].trim().toLowerCase() : '';
+
+            if (approved !== 'yes') return; // only show approved reviews
             if (!name || !text) return;
 
             var card = document.createElement('div');
