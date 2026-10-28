@@ -77,9 +77,8 @@
 
     <!-- ============================================================
          REVIEW SECTION
-         Lets any visitor submit a review, and shows every submitted
-         review publicly below the form. No backend — uses a Google
-         Form + Google Sheet as free storage.
+         Visitors submit a review via Google Form; all reviews are
+         shown publicly below from the published Google Sheet CSV.
          ============================================================ -->
     <section style="margin-top:64px; text-align:left;">
       <h2 class="subpage-title" style="font-size:1.6rem; text-align:center; margin-bottom:8px;">Reviews</h2>
@@ -132,43 +131,72 @@
       }, 600);
     });
 
-    // Load all public reviews from the published Google Sheet CSV
-    // CSV LINK: replace CSV_LINK below with your published sheet link once you have it
-    // (Settings → File → Share → Publish to web → CSV → copy that link)
-    var CSV_LINK = 'CSV_LINK';
+    // Published Google Sheet CSV link
+    var CSV_LINK = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQMYXzq0GFCidEyw8ibHZEZMvkFO1Ie1bewmTAtSjW-H5te-1Jqw3RjsqZd_h_idD5u4xWb6ZdjeLKx/pub?gid=733508965&single=true&output=csv';
+
+    // Proper CSV parser (handles commas, quotes, line breaks inside reviews)
+    function parseCSV(text) {
+      var rows = [], row = [], cur = '', q = false;
+      for (var i = 0; i < text.length; i++) {
+        var c = text[i];
+        if (q) {
+          if (c === '"') {
+            if (text[i + 1] === '"') { cur += '"'; i++; }
+            else q = false;
+          } else cur += c;
+        } else {
+          if (c === '"') q = true;
+          else if (c === ',') { row.push(cur); cur = ''; }
+          else if (c === '\n' || c === '\r') {
+            if (c === '\r' && text[i + 1] === '\n') i++;
+            row.push(cur); rows.push(row); row = []; cur = '';
+          } else cur += c;
+        }
+      }
+      if (cur || row.length) { row.push(cur); rows.push(row); }
+      return rows;
+    }
 
     if (CSV_LINK.indexOf('http') === 0) {
       fetch(CSV_LINK)
         .then(function (res) {
-          // Safety check: only proceed if the response actually looks like CSV.
-          // Prevents garbage cards if CSV_LINK ever points to the wrong file
-          // (e.g. style.css or a Google Fonts link) by mistake.
-          var contentType = res.headers.get('content-type') || '';
-          if (contentType.indexOf('csv') === -1 && contentType.indexOf('text/plain') === -1) {
-            throw new Error('CSV_LINK is not returning CSV content — check the link.');
-          }
+          if (!res.ok) throw new Error('Could not load CSV (status ' + res.status + ')');
           return res.text();
         })
         .then(function (csv) {
-          var rows = csv.trim().split('\n').slice(1); // skip header row
+          var rows = parseCSV(csv.trim()).slice(1); // skip header row
           var list = document.getElementById('reviewList');
-          if (rows.length === 0 || (rows.length === 1 && rows[0] === '')) return;
 
-          rows.reverse().forEach(function (row) {
-            var cols = row.split(',');
-            // Column order: Timestamp, Name, Review — adjust indexes if your sheet differs
-            var name = cols[1] ? cols[1].replace(/"/g, '').trim() : 'Anonymous';
-            var text = cols[2] ? cols[2].replace(/"/g, '').trim() : '';
-            if (!name || !text) return; // skip rows that don't look like real name+review pairs
+          rows.reverse().forEach(function (cols) {
+            // Column order: Timestamp, Name, Review
+            var name = cols[1] ? cols[1].trim() : '';
+            var text = cols[2] ? cols[2].trim() : '';
+            if (!name || !text) return;
 
             var card = document.createElement('div');
             card.className = 'review-card';
-            card.innerHTML =
-              '<p class="review-quote">"' + text + '"</p>' +
-              '<div class="review-person">' +
-              '<div class="review-avatar">' + name.charAt(0).toUpperCase() + '</div>' +
-              '<div><div class="review-name">' + name + '</div></div>' +
-              '</div>';
+
+            var quote = document.createElement('p');
+            quote.className = 'review-quote';
+            quote.textContent = '"' + text + '"';
+
+            var person = document.createElement('div');
+            person.className = 'review-person';
+
+            var avatar = document.createElement('div');
+            avatar.className = 'review-avatar';
+            avatar.textContent = name.charAt(0).toUpperCase();
+
+            var wrap = document.createElement('div');
+            var nm = document.createElement('div');
+            nm.className = 'review-name';
+            nm.textContent = name;
+            wrap.appendChild(nm);
+
+            person.appendChild(avatar);
+            person.appendChild(wrap);
+            card.appendChild(quote);
+            card.appendChild(person);
             list.appendChild(card);
           });
         })
