@@ -47,6 +47,10 @@
     .sr-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 5px; }
     .sr-list li { font-size: 0.9rem; color: var(--text-main); padding-left: 16px; position: relative; }
     .sr-list li::before { content: '·'; color: var(--accent); font-weight: 700; position: absolute; left: 4px; }
+    .sr-list li.sr-sub { padding-left: 34px; }
+    .sr-list li.sr-sub::before { left: 22px; }
+    .sr-list li.sr-group { padding-left: 0; font-weight: 700; color: var(--text-main); margin-top: 6px; }
+    .sr-list li.sr-group::before { content: none; }
     .sr-empty { font-size: 0.85rem; color: var(--text-muted); }
     .sr-hint { margin-top: 14px; font-size: 0.9rem; line-height: 1.7; color: var(--text-muted); }
     .sr-hint strong { color: var(--accent); }
@@ -409,6 +413,7 @@
       //  final = notes available right now for Final
       //  Add a note  -> put a new text inside [ ] , separated by commas
       //  Example     -> mid: ['Chapter 1 Notes', 'Chapter 2 Notes']
+      //  Group title -> start with # , e.g. '#Theory:' (items after it are indented)
       //  Nothing yet -> leave it empty like this: []
       //  keywords    = extra words people can type to find the course
       // =====================================================================
@@ -426,7 +431,7 @@
           name: 'Software Quality Assurance & Testing',
           code: 'SE-312',
           keywords: 'sqa qa testing',
-          mid: ['Introduction', 'Quiz-1 Questions with ans', 'BVA'],
+          mid: ['Introduction', 'Quiz-1 Questions with ans', '#Theory:', 'Fundamentals', 'Psychology of Testing', '7 Testing Principles', 'Practice', '#Math:', 'BVA'],
           final: []
         },
         {
@@ -465,6 +470,10 @@
         return [c.name, c.code, c.keywords].concat(c.mid, c.final).join(' ').toLowerCase();
       }
 
+      function countNotes(list) {
+        return list.filter(function (n) { return n.charAt(0) !== '#'; }).length;
+      }
+
       function block(label, notes) {
         var wrap = el('div');
         wrap.appendChild(el('div', 'sr-term', label));
@@ -472,14 +481,22 @@
           wrap.appendChild(el('div', 'sr-empty', 'Nothing uploaded yet'));
         } else {
           var ul = el('ul', 'sr-list');
-          notes.forEach(function (n) { ul.appendChild(el('li', '', n)); });
+          var inGroup = false;
+          notes.forEach(function (n) {
+            if (n.charAt(0) === '#') {
+              inGroup = true;
+              ul.appendChild(el('li', 'sr-group', n.slice(1)));
+            } else {
+              ul.appendChild(el('li', inGroup ? 'sr-sub' : '', n));
+            }
+          });
           wrap.appendChild(ul);
         }
         return wrap;
       }
 
       function card(c) {
-        var count = c.mid.length + c.final.length;
+        var count = countNotes(c.mid) + countNotes(c.final);
         var box = el('div', 'sr-card');
         var head = el('div', 'sr-head');
         var left = el('div');
