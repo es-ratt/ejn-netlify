@@ -1029,3 +1029,10 @@ body.page-exit {
   border-color: var(--border);
 }
 ---- */
+
+.drive-btn:disabled,
+.drive-btn:disabled:hover {
+  background: var(--surface2);
+  color: var(--text-muted);
+  border-color: var(--border);
+}
