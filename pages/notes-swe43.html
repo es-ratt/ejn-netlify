@@ -51,46 +51,61 @@
     .sr-hint { margin-top: 14px; font-size: 0.9rem; line-height: 1.7; color: var(--text-muted); }
     .sr-hint strong { color: var(--accent); }
 
-    /* ===== Sky clouds ===== */
-    .subpage-header { position: relative; min-height: 230px; }
+    /* ===== Sky clouds (side by side, opposite float) ===== */
+    .subpage-header { position: relative; min-height: 150px; }
     .sky-clouds {
-      position: absolute; top: -10px; right: 0; width: 250px;
-      display: flex; flex-direction: column; gap: 38px;
+      position: absolute; top: 14px; right: 0;
+      display: flex; flex-direction: row; align-items: center; gap: 30px;
     }
     .sky-cloud {
-      position: relative; padding: 22px 20px; text-align: center;
+      position: relative; padding: 20px 20px 22px; text-align: center;
       background: var(--surface, #fff); border-radius: 50px;
       filter: drop-shadow(0 10px 20px rgba(22,163,74,0.28));
-      animation: cloudFloat 4.5s ease-in-out infinite;
     }
     .sky-cloud::before, .sky-cloud::after {
       content: ''; position: absolute; background: var(--surface, #fff); border-radius: 50%;
     }
     .sky-cloud > * { position: relative; z-index: 1; }
 
-    /* Cloud 1: Testing */
-    .sky-cloud.c1 { align-self: flex-end; width: 210px; }
-    .sky-cloud.c1::before { width: 80px; height: 80px; top: -34px; left: 26px; }
-    .sky-cloud.c1::after  { width: 60px; height: 60px; top: -24px; right: 26px; }
+    /* Cloud 1: Testing (goes up first, then down) */
+    .sky-cloud.c1 { width: 170px; animation: floatUp 4.5s ease-in-out infinite; }
+    .sky-cloud.c1::before { width: 70px; height: 70px; top: -30px; left: 22px; }
+    .sky-cloud.c1::after  { width: 52px; height: 52px; top: -20px; right: 22px; }
 
-    /* Cloud 2: Business Analysis */
-    .sky-cloud.c2 { align-self: flex-start; width: 235px; animation-duration: 5.5s; animation-delay: -2s; }
-    .sky-cloud.c2::before { width: 62px; height: 62px; top: -26px; left: 20px; }
-    .sky-cloud.c2::after  { width: 88px; height: 88px; top: -38px; right: 34px; }
+    /* Cloud 2: Business Analysis (goes down first, then up) */
+    .sky-cloud.c2 { width: 195px; animation: floatDown 4.5s ease-in-out infinite; }
+    .sky-cloud.c2::before { width: 54px; height: 54px; top: -22px; left: 18px; }
+    .sky-cloud.c2::after  { width: 76px; height: 76px; top: -32px; right: 28px; }
 
+    /* "Collect now" pill: noticeable like the Purchase button */
     .sky-cloud-label {
+      display: inline-block; padding: 6px 14px; margin-bottom: 8px;
+      border-radius: 100px; background: var(--accent); color: #FFFFFF;
       font-size: 0.68rem; font-weight: 800; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px;
+      text-transform: uppercase; white-space: nowrap;
+      animation: pillPulse 1.8s ease-out infinite;
     }
-    .sky-cloud-item { font-size: 0.95rem; font-weight: 800; color: var(--accent); line-height: 1.4; }
-    @keyframes cloudFloat {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-12px); }
+    .sky-cloud-item { font-family: 'Fraunces', Georgia, serif; font-size: 1.05rem; font-weight: 400; font-style: italic; color: var(--accent); line-height: 1.4; }
+
+    @keyframes floatUp {
+      0%, 100% { transform: translateY(-14px); }
+      50% { transform: translateY(14px); }
+    }
+    @keyframes floatDown {
+      0%, 100% { transform: translateY(14px); }
+      50% { transform: translateY(-14px); }
+    }
+    @keyframes pillPulse {
+      0%   { box-shadow: 0 0 0 0 rgba(22,163,74,0.55); }
+      70%  { box-shadow: 0 0 0 10px rgba(22,163,74,0); }
+      100% { box-shadow: 0 0 0 0 rgba(22,163,74,0); }
     }
     @media (max-width: 640px) {
       .subpage-header { min-height: 0; }
-      .sky-clouds { position: relative; top: auto; right: auto; width: 100%; margin-top: 46px; align-items: center; }
-      .sky-cloud.c1, .sky-cloud.c2 { align-self: center; }
+      .sky-clouds {
+        position: relative; top: auto; right: auto; width: 100%;
+        margin-top: 46px; justify-content: center; flex-wrap: wrap; gap: 36px;
+      }
     }
   </style>
 </head>
