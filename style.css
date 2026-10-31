@@ -1021,3 +1021,11 @@ body.page-exit {
   .term-choice-grid { grid-template-columns: 1fr; }
   .course-item { flex-direction: column; align-items: flex-start; gap: 6px; }
 }
+
+/* ---- .drive-btn:disabled,
+.drive-btn:disabled:hover {
+  background: var(--surface2);
+  color: var(--text-muted);
+  border-color: var(--border);
+}
+---- */
