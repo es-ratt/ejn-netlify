@@ -10,106 +10,174 @@
     href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,600..900;1,9..144,600..900&display=swap"
     rel="stylesheet" />
   <style>
-    .search-wrap { position: relative; margin-bottom: 14px; }
+    .search-wrap {
+      position: relative;
+      margin-bottom: 14px;
+    }
+
     .search-input {
-      width: 100%; padding: 14px 44px 14px 18px; font-size: 0.95rem;
-      font-family: var(--font-body); color: var(--text-main);
-      background: var(--surface); border: 1.5px solid var(--border);
-      border-radius: var(--radius-sm); outline: none; transition: border-color 0.2s;
+      width: 100%;
+      padding: 14px 44px 14px 18px;
+      font-size: 0.95rem;
+      font-family: var(--font-body);
+      color: var(--text-main);
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      outline: none;
+      transition: border-color 0.2s;
     }
-    .search-input:focus { border-color: var(--accent); }
+
+    .search-input:focus {
+      border-color: var(--accent);
+    }
+
     .search-clear {
-      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
-      display: none; border: none; background: none; cursor: pointer;
-      font-size: 1.2rem; line-height: 1; color: var(--text-muted);
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: none;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: 1.2rem;
+      line-height: 1;
+      color: var(--text-muted);
     }
-    .sr-wrap { display: none; margin-bottom: 22px; }
-    .sr-meta { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 10px; }
+
+    .sr-wrap {
+      display: none;
+      margin-bottom: 22px;
+    }
+
+    .sr-meta {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
     .sr-card {
-      background: var(--surface); border: 1.5px solid var(--border);
-      border-radius: var(--radius); padding: 20px 22px; margin-bottom: 12px;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      margin-bottom: 12px;
     }
-    .sr-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
-    .sr-title { font-weight: 700; font-size: 1rem; color: var(--text-main); }
-    .sr-code { font-size: 0.78rem; font-weight: 700; color: var(--accent); margin-top: 2px; }
+
+    .sr-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .sr-title {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text-main);
+    }
+
+    .sr-code {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-top: 2px;
+    }
+
     .sr-badge {
-      display: inline-flex; align-items: center; padding: 8px 18px; border-radius: 100px;
-      font-size: 0.82rem; font-weight: 700; white-space: nowrap;
-      background: var(--surface2); color: var(--text-muted); border: 1.5px solid var(--border);
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 18px;
+      border-radius: 100px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      white-space: nowrap;
+      background: var(--surface2);
+      color: var(--text-muted);
+      border: 1.5px solid var(--border);
       transition: background var(--transition), color var(--transition), border-color var(--transition);
     }
-    .sr-badge.on { background: var(--highlight); color: var(--accent); border-color: rgba(22,163,74,0.3); }
-    .sr-badge.on:hover { background: var(--accent); color: #FFFFFF; border-color: var(--accent); }
+
+    .sr-badge.on {
+      background: var(--highlight);
+      color: var(--accent);
+      border-color: rgba(22, 163, 74, 0.3);
+    }
+
+    .sr-badge.on:hover {
+      background: var(--accent);
+      color: #FFFFFF;
+      border-color: var(--accent);
+    }
+
     .sr-term {
-      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
-      color: var(--text-muted); margin: 14px 0 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin: 14px 0 6px;
     }
-    .sr-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 5px; }
-    .sr-list li { font-size: 0.9rem; color: var(--text-main); padding-left: 16px; position: relative; }
-    .sr-list li::before { content: '·'; color: var(--accent); font-weight: 700; position: absolute; left: 4px; }
-    .sr-list li.sr-sub { padding-left: 34px; }
-    .sr-list li.sr-sub::before { left: 22px; }
-    .sr-list li.sr-group { padding-left: 0; font-weight: 400; color: var(--text-main); margin-top: 6px; }
-    .sr-list li.sr-group::before { content: none; }
-    .sr-empty { font-size: 0.85rem; color: var(--text-muted); }
-    .sr-hint { margin-top: 14px; font-size: 0.9rem; line-height: 1.7; color: var(--text-muted); }
-    .sr-hint strong { color: var(--accent); }
 
-    /* ===== Sky clouds (side by side, opposite float) ===== */
-    .subpage-header { position: relative; min-height: 150px; }
-    .sky-clouds {
-      position: absolute; top: 14px; right: 0;
-      display: flex; flex-direction: row; align-items: center; gap: 30px;
+    .sr-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
     }
-    .sky-cloud {
-      position: relative; padding: 20px 20px 22px; text-align: center;
-      background: var(--surface, #fff); border-radius: 50px;
-      filter: drop-shadow(0 10px 20px rgba(22,163,74,0.28));
-    }
-    .sky-cloud::before, .sky-cloud::after {
-      content: ''; position: absolute; background: var(--surface, #fff); border-radius: 50%;
-    }
-    .sky-cloud > * { position: relative; z-index: 1; }
 
-    /* Cloud 1: Testing (goes up first, then down) */
-    .sky-cloud.c1 { width: 170px; animation: floatUp 4.5s ease-in-out infinite; }
-    .sky-cloud.c1::before { width: 70px; height: 70px; top: -30px; left: 22px; }
-    .sky-cloud.c1::after  { width: 52px; height: 52px; top: -20px; right: 22px; }
+    .sr-list li {
+      font-size: 0.9rem;
+      color: var(--text-main);
+      padding-left: 16px;
+      position: relative;
+    }
 
-    /* Cloud 2: Business Analysis (goes down first, then up) */
-    .sky-cloud.c2 { width: 195px; animation: floatDown 4.5s ease-in-out infinite; }
-    .sky-cloud.c2::before { width: 54px; height: 54px; top: -22px; left: 18px; }
-    .sky-cloud.c2::after  { width: 76px; height: 76px; top: -32px; right: 28px; }
+    .sr-list li::before {
+      content: '·';
+      color: var(--accent);
+      font-weight: 700;
+      position: absolute;
+      left: 4px;
+    }
 
-    /* "Collect now" pill: noticeable like the Purchase button */
-    .sky-cloud-label {
-      display: inline-block; padding: 6px 14px; margin-bottom: 8px;
-      border-radius: 100px; background: var(--accent); color: #FFFFFF;
-      font-size: 0.68rem; font-weight: 800; letter-spacing: 0.08em;
-      text-transform: uppercase; white-space: nowrap;
-      animation: pillPulse 1.8s ease-out infinite;
+    .sr-list li.sr-sub {
+      padding-left: 34px;
     }
-    .sky-cloud-item { font-family: 'Fraunces', Georgia, serif; font-size: 1.05rem; font-weight: 400; font-style: italic; color: var(--accent); line-height: 1.4; }
 
-    @keyframes floatUp {
-      0%, 100% { transform: translateY(-14px); }
-      50% { transform: translateY(14px); }
+    .sr-list li.sr-sub::before {
+      left: 22px;
     }
-    @keyframes floatDown {
-      0%, 100% { transform: translateY(14px); }
-      50% { transform: translateY(-14px); }
+
+    .sr-list li.sr-group {
+      padding-left: 0;
+      font-weight: 400;
+      color: var(--text-main);
+      margin-top: 6px;
     }
-    @keyframes pillPulse {
-      0%   { box-shadow: 0 0 0 0 rgba(22,163,74,0.55); }
-      70%  { box-shadow: 0 0 0 10px rgba(22,163,74,0); }
-      100% { box-shadow: 0 0 0 0 rgba(22,163,74,0); }
+
+    .sr-list li.sr-group::before {
+      content: none;
     }
-    @media (max-width: 640px) {
-      .subpage-header { min-height: 0; }
-      .sky-clouds {
-        position: relative; top: auto; right: auto; width: 100%;
-        margin-top: 46px; justify-content: center; flex-wrap: wrap; gap: 36px;
-      }
+
+    .sr-empty {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .sr-hint {
+      margin-top: 14px;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    .sr-hint strong {
+      color: var(--accent);
     }
   </style>
 </head>
@@ -129,17 +197,6 @@
     <div class="subpage-header">
       <div class="subpage-tag">Notes for SWE-43</div>
       <h1 class="subpage-title">Notes for<br /><span style="color:var(--accent);">SWE-43</span></h1>
-
-      <div class="sky-clouds">
-        <div class="sky-cloud c1">
-          <div class="sky-cloud-label">Collect now</div>
-          <div class="sky-cloud-item">Testing Notes</div>
-        </div>
-        <div class="sky-cloud c2">
-          <div class="sky-cloud-label">Collect now</div>
-          <div class="sky-cloud-item">Business Analysis Notes</div>
-        </div>
-      </div>
     </div>
 
     <!-- Live search: shows what is available in each course -->
@@ -184,12 +241,12 @@
                     <div class="drive-label">Data Communication & Computer Networking</div>
                   </div>
                 </div>
-                <button type="button" class="drive-btn"
-                  style="border:none; cursor:pointer; font-family:inherit;"
-                  onclick="this.textContent='Not available'; this.disabled=true; this.style.opacity='0.6'; this.style.cursor='not-allowed';">Purchase this course</button>
+                <button type="button" class="drive-btn" style="border:none; cursor:pointer; font-family:inherit;"
+                  onclick="this.textContent='Not available'; this.disabled=true; this.style.opacity='0.6'; this.style.cursor='not-allowed';">Purchase
+                  this course</button>
               </div>
 
-              <div class="drive-card">
+              <!-- <div class="drive-card">
                 <div class="drive-card-left">
                   <div>
                     <div class="drive-label">Software Quality Assurance & Testing</div>
@@ -197,9 +254,20 @@
                 </div>
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLScsG6sl5SE215tSCPEcabgTcLVzYoaWMo0zQUa7mzRMaLa6AA/viewform?usp=dialog"
                   target="_blank" rel="noopener noreferrer" class="drive-btn">Purchase this course </a>
-              </div>
+              </div> -->
 
               <div class="drive-card">
+                <div class="drive-card-left">
+                  <div>
+                    <div class="drive-label">Software Quality Assurance & Testing</div>
+                  </div>
+                </div>
+                <button type="button" class="drive-btn" style="border:none; cursor:pointer; font-family:inherit;"
+                  onclick="this.textContent='Not available'; this.disabled=true; this.style.opacity='0.6'; this.style.cursor='not-allowed';">Purchase
+                  this course</button>
+              </div>
+
+              <!-- <div class="drive-card">
                 <div class="drive-card-left">
                   <div>
                     <div class="drive-label">Business Analysis & Communication</div>
@@ -207,6 +275,17 @@
                 </div>
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLScsG6sl5SE215tSCPEcabgTcLVzYoaWMo0zQUa7mzRMaLa6AA/viewform?usp=dialog"
                   target="_blank" rel="noopener noreferrer" class="drive-btn">Purchase this course </a>
+              </div> -->
+
+              <div class="drive-card">
+                <div class="drive-card-left">
+                  <div>
+                    <div class="drive-label">Business Analysis & Communication</div>
+                  </div>
+                </div>
+                <button type="button" class="drive-btn" style="border:none; cursor:pointer; font-family:inherit;"
+                  onclick="this.textContent='Not available'; this.disabled=true; this.style.opacity='0.6'; this.style.cursor='not-allowed';">Purchase
+                  this course</button>
               </div>
 
               <!-- <div class="drive-card">
@@ -225,9 +304,9 @@
                     <div class="drive-label">Design Pattern</div>
                   </div>
                 </div>
-                <button type="button" class="drive-btn"
-                  style="border:none; cursor:pointer; font-family:inherit;"
-                  onclick="this.textContent='Not available'; this.disabled=true; this.style.opacity='0.6'; this.style.cursor='not-allowed';">Purchase this course</button>
+                <button type="button" class="drive-btn" style="border:none; cursor:pointer; font-family:inherit;"
+                  onclick="this.textContent='Not available'; this.disabled=true; this.style.opacity='0.6'; this.style.cursor='not-allowed';">Purchase
+                  this course</button>
               </div>
 
             </div>
@@ -264,9 +343,9 @@
                     <div class="drive-label">Data Communication & Computer Networking</div>
                   </div>
                 </div>
-                <button type="button" class="drive-btn"
-                  style="border:none; cursor:pointer; font-family:inherit;"
-                  onclick="this.textContent='Not available'; this.disabled=true; this.style.opacity='0.6'; this.style.cursor='not-allowed';">Purchase this course</button>
+                <button type="button" class="drive-btn" style="border:none; cursor:pointer; font-family:inherit;"
+                  onclick="this.textContent='Coming soon'; this.disabled=true; this.style.opacity='0.6'; this.style.cursor='not-allowed';">Purchase
+                  this course</button>
               </div>
 
               <!-- <div class="drive-card">
@@ -285,9 +364,9 @@
                     <div class="drive-label">Software Quality Assurance & Testing</div>
                   </div>
                 </div>
-                <button type="button" class="drive-btn"
-                  style="border:none; cursor:pointer; font-family:inherit;"
-                  onclick="this.textContent='Not available'; this.disabled=true; this.style.opacity='0.6'; this.style.cursor='not-allowed';">Purchase this course</button>
+                <button type="button" class="drive-btn" style="border:none; cursor:pointer; font-family:inherit;"
+                  onclick="this.textContent='Coming soon'; this.disabled=true; this.style.opacity='0.6'; this.style.cursor='not-allowed';">Purchase
+                  this course</button>
               </div>
 
               <!-- <div class="drive-card">
@@ -306,9 +385,9 @@
                     <div class="drive-label">Business Analysis & Communication</div>
                   </div>
                 </div>
-                <button type="button" class="drive-btn"
-                  style="border:none; cursor:pointer; font-family:inherit;"
-                  onclick="this.textContent='Not available'; this.disabled=true; this.style.opacity='0.6'; this.style.cursor='not-allowed';">Purchase this course</button>
+                <button type="button" class="drive-btn" style="border:none; cursor:pointer; font-family:inherit;"
+                  onclick="this.textContent='Coming soon'; this.disabled=true; this.style.opacity='0.6'; this.style.cursor='not-allowed';">Purchase
+                  this course</button>
               </div>
 
               <!-- <div class="drive-card">
@@ -327,9 +406,9 @@
                     <div class="drive-label">Design Pattern</div>
                   </div>
                 </div>
-                <button type="button" class="drive-btn"
-                  style="border:none; cursor:pointer; font-family:inherit;"
-                  onclick="this.textContent='Not available'; this.disabled=true; this.style.opacity='0.6'; this.style.cursor='not-allowed';">Purchase this course</button>
+                <button type="button" class="drive-btn" style="border:none; cursor:pointer; font-family:inherit;"
+                  onclick="this.textContent='Coming soon'; this.disabled=true; this.style.opacity='0.6'; this.style.cursor='not-allowed';">Purchase
+                  this course</button>
               </div>
 
             </div>
@@ -345,7 +424,7 @@
           <div class="accordion-body">
             <div class="drive-list" style="margin-top: 4px;">
 
-              <div class="drive-card">
+              <!-- <div class="drive-card">
                 <div class="drive-card-left">
                   <div>
                     <div class="drive-label">Mid Questions</div>
@@ -353,10 +432,19 @@
                 </div>
                 <a href="https://drive.google.com/drive/folders/1FwCHGB7obx6Pg-W9uPmvUpn1LStxMP2c?usp=sharing"
                   target="_blank" rel="noopener noreferrer" class="drive-btn">Collect PDF</a>
+              </div> -->
+
+              <div class="drive-card">
+                <div class="drive-card-left">
+                  <div>
+                    <div class="drive-label">Mid Questions</div>
+                  </div>
+                </div>
+                <button type="button" class="drive-btn" style="border:none; cursor:pointer; font-family:inherit;"
+                  onclick="this.textContent='Not available';">Collect PDF</button>
               </div>
 
-              <!--
-              <div class="drive-card">
+              <!-- <div class="drive-card">
                 <div class="drive-card-left">
                   <div>
                     <div class="drive-label">Final Questions</div>
@@ -364,8 +452,17 @@
                 </div>
                 <a href="https://drive.google.com/drive/folders/1ILRG-kc6FzQwaFLTDpZGhNK176xajqQE?usp=sharing"
                   target="_blank" rel="noopener noreferrer" class="drive-btn">Collect PDF</a>
+              </div> -->
+
+              <div class="drive-card">
+                <div class="drive-card-left">
+                  <div>
+                    <div class="drive-label">Final Questions</div>
+                  </div>
+                </div>
+                <button type="button" class="drive-btn" style="border:none; cursor:pointer; font-family:inherit;"
+                  onclick="this.textContent='Not available';">Collect PDF</button>
               </div>
-              -->
 
             </div>
           </div>
@@ -423,8 +520,8 @@
           code: 'SE-225',
           keywords: 'dccn dcn cn networking network',
           mid: ['1.1 Basic & Maths Notes ***', '1.2 Questions of Maths', '2.1 Quiz-2 Prep ***', '2.2 Math Practice',
-                '3. Mid Theory Notes ***', '4. Network Models: OSI, TCP/IP and Addressing Notes **', '5. Previous Semester Analysis',
-                '6. Last Night Exam Suggestions ****'],
+            '3. Mid Theory Notes ***', '4. Network Models: OSI, TCP/IP and Addressing Notes **', '5. Previous Semester Analysis',
+            '6. Last Night Exam Suggestions ****'],
           final: []
         },
         {
@@ -439,7 +536,7 @@
           code: 'GE-324',
           keywords: 'bac ba business',
           mid: ['Chapter-1 Notes', 'Chapter-2 Notes', 'Overview of next topics',
-                 'Question Pattern for Chap-1,2,3', 'Previous Semesters Questions Analysis Questions'
+            'Question Pattern for Chap-1,2,3', 'Previous Semesters Questions Analysis Questions'
           ],
           final: []
         },
