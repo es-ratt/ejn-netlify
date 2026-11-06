@@ -69,6 +69,304 @@
     .locked-note {
       cursor: pointer;
     }
+
+    /* Mid panel: same green look and hover effect as the Final panel, but not clickable */
+    .course-buy-btn.is-disabled,
+    .buy-all-btn.is-disabled {
+      cursor: default;
+      user-select: none;
+    }
+
+    /* ===== Final panel: "See Notes Details" button ===== */
+    button.course-buy-btn {
+      font-family: var(--font-body, inherit);
+      cursor: pointer;
+    }
+
+    /* ===== Notes details popup ===== */
+    .nd-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(22, 35, 26, 0.38);
+      -webkit-backdrop-filter: blur(7px);
+      backdrop-filter: blur(7px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.28s ease, visibility 0s linear 0.28s;
+    }
+
+    .nd-overlay.open {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.28s ease, visibility 0s linear 0s;
+    }
+
+    .nd-modal {
+      position: relative;
+      width: 100%;
+      max-width: 560px;
+      max-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      background: var(--surface, #fff);
+      border: 1.5px solid var(--border);
+      border-radius: 22px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.28);
+      font-family: var(--font-body);
+      transform: translateY(18px) scale(0.97);
+      opacity: 0;
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease;
+    }
+
+    .nd-overlay.open .nd-modal {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+
+    .nd-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border);
+      background: var(--surface2);
+      color: var(--text-main);
+      font-size: 1.3rem;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .nd-close:hover {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .nd-head {
+      padding: 26px 64px 18px 26px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nd-code {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      background: var(--highlight);
+      border: 1px solid rgba(22, 163, 74, 0.25);
+      border-radius: 100px;
+      padding: 3px 12px;
+      margin-bottom: 10px;
+    }
+
+    .nd-title {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 800;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+      color: var(--text-main);
+    }
+
+    .nd-body {
+      padding: 20px 26px;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .nd-section+.nd-section {
+      margin-top: 22px;
+    }
+
+    .nd-section h3 {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 8px;
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .nd-section p {
+      margin: 0;
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+    }
+
+    .nd-hl {
+      font-weight: 700;
+      color: var(--accent2);
+    }
+
+    .nd-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      color: var(--accent2);
+      background: var(--highlight2);
+      border-radius: 100px;
+      padding: 3px 10px;
+    }
+
+    .nd-list {
+      list-style: none;
+      margin: 12px 0 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      counter-reset: nd;
+    }
+
+    .nd-list li {
+      counter-increment: nd;
+      position: relative;
+      padding: 12px 14px 12px 50px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 0.86rem;
+      line-height: 1.55;
+      color: var(--text-muted);
+    }
+
+    .nd-list li::before {
+      content: counter(nd);
+      position: absolute;
+      left: 13px;
+      top: 12px;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--highlight);
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nd-list li strong {
+      display: block;
+      margin-bottom: 2px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .nd-free {
+      margin-top: 14px;
+      padding: 14px 16px;
+      background: var(--highlight);
+      border: 1.5px solid rgba(22, 163, 74, 0.3);
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: var(--text-main);
+    }
+
+    .nd-chip {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: #fff;
+      background: var(--accent);
+      border-radius: 100px;
+      padding: 2px 10px;
+      vertical-align: 1px;
+    }
+
+    .nd-foot {
+      padding: 16px 26px 22px;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 0 0 22px 22px;
+    }
+
+    .nd-buy {
+      width: 100%;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 800;
+      color: #fff;
+      background: var(--accent);
+      padding: 15px 20px;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 8px 22px rgba(22, 163, 74, 0.32);
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .nd-buy:hover {
+      background: var(--accent2);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(22, 163, 74, 0.38);
+    }
+
+    .nd-foot-note {
+      margin: 10px 0 0;
+      text-align: center;
+      font-size: 0.78rem;
+      line-height: 1.5;
+      color: var(--text-muted);
+    }
+
+    .nd-foot-note strong {
+      color: var(--text-main);
+      font-weight: 700;
+    }
+
+    @media (max-width: 640px) {
+      .nd-overlay {
+        align-items: flex-end;
+        padding: 0;
+      }
+
+      .nd-modal {
+        max-width: none;
+        max-height: 92vh;
+        border-radius: 22px 22px 0 0;
+        transform: translateY(40px);
+      }
+
+      .nd-head {
+        padding: 22px 60px 16px 20px;
+      }
+
+      .nd-body {
+        padding: 18px 20px;
+      }
+
+      .nd-foot {
+        padding: 14px 20px 20px;
+        border-radius: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .nd-overlay,
+      .nd-modal {
+        transition: none;
+      }
+    }
   </style>
 </head>
 
@@ -109,7 +407,7 @@
       </div>
     </div>
 
-    <!-- ============ MID PANEL ============ -->
+    <!-- ============ OLD MID PANEL (disabled, kept for reference) ============
     <div class="semester-panel" id="panel-mid">
 
       <div class="info-box">
@@ -119,7 +417,7 @@
 
       <div class="semester-grid">
 
-        <!-- Semester 1 -->
+        [Semester 1]
         <div class="semester-card">
           <div class="semester-card-title">1st Semester</div>
           <span class="semester-card-tag">3 courses available</span>
@@ -145,7 +443,7 @@
             class="buy-all-btn" target="_blank">Purchase all available courses for this semester</a>
         </div>
 
-        <!-- Semester 2 -->
+        [Semester 2]
         <div class="semester-card">
           <div class="semester-card-title">2nd Semester</div>
           <span class="semester-card-tag">2 courses available</span>
@@ -167,7 +465,7 @@
             class="buy-all-btn" target="_blank">Purchase all available courses for this semester</a>
         </div>
 
-        <!-- Semester 3 -->
+        [Semester 3]
         <div class="semester-card">
           <div class="semester-card-title">3rd Semester</div>
           <span class="semester-card-tag">4 courses available</span>
@@ -199,7 +497,7 @@
             class="buy-all-btn" target="_blank">Purchase all available courses for this semester</a>
         </div>
 
-        <!-- Semester 4 -->
+        [Semester 4]
         <div class="semester-card">
           <div class="semester-card-title">4th Semester</div>
           <span class="semester-card-tag">4 courses available</span>
@@ -230,7 +528,7 @@
             class="buy-all-btn" target="_blank">Purchase all available courses for this semester</a>
         </div>
 
-        <!-- Semester 5 -->
+        [Semester 5]
         <div class="semester-card">
           <div class="semester-card-title">5th Semester</div>
           <span class="semester-card-tag">3 courses available</span>
@@ -256,7 +554,7 @@
             class="buy-all-btn" target="_blank">Purchase all available courses for this semester</a>
         </div>
 
-        <!-- Semester 6 -->
+        [Semester 6]
         <div class="semester-card">
           <div class="semester-card-title">6th Semester</div>
           <span class="semester-card-tag">4 courses available</span>
@@ -287,6 +585,178 @@
 
           <a href="https://docs.google.com/forms/d/e/1FAIpQLSejW7pUO3420Hn-CFRK3AMrpWqWtcimG4wOqQKnLNFZq2eI_Q/viewform?usp=dialog"
             class="buy-all-btn" target="_blank">Purchase all available courses for this semester</a>
+        </div>
+
+        [Semester 7-12: coming soon]
+        <div class="semester-card coming-soon">
+          <div class="semester-card-title">7th – 12th Semester</div>
+          <span class="semester-card-tag soon">Coming soon</span>
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-top:8px;">Notes for these semesters will be added
+            soon. Check back later.</p>
+        </div>
+
+      </div>
+    </div>
+    ============ END OLD MID PANEL ============ -->
+
+    <!-- ============ MID PANEL ============ -->
+    <div class="semester-panel" id="panel-mid">
+
+      <div class="info-box">
+        You're viewing <strong>Mid-term notes</strong>. Pick a course to buy individually, or grab the full semester
+        bundle.
+      </div>
+
+      <div class="semester-grid">
+
+        <!-- Semester 1 -->
+        <div class="semester-card">
+          <div class="semester-card-title">1st Semester</div>
+          <span class="semester-card-tag">3 courses available</span>
+
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-111</span> — Computer Fundamentals</span>
+            <span class="course-buy-btn is-disabled" aria-disabled="true">Not Available</span>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-113</span> — Introduction to Software
+              Engineering</span>
+            <span class="course-buy-btn is-disabled" aria-disabled="true">Not Available</span>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">BNS-101</span> — Bangladesh Studies</span>
+            <span class="course-buy-btn is-disabled" aria-disabled="true">Not Available</span>
+          </div>
+
+          <span class="buy-all-btn is-disabled" aria-disabled="true">Will be available before the Spring 2027 semester
+            begins</span>
+        </div>
+
+        <!-- Semester 2 -->
+        <div class="semester-card">
+          <div class="semester-card-title">2nd Semester</div>
+          <span class="semester-card-tag">2 courses available</span>
+
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">MAT-101</span> — Math-I: Calculus &amp; Geometry</span>
+            <span class="course-buy-btn is-disabled" aria-disabled="true">Not Available</span>
+          </div>
+
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">PHY-101</span> — Physics: Mechanics, Electromagnetism
+              &amp; Waves</span>
+            <span class="course-buy-btn is-disabled" aria-disabled="true">Not Available</span>
+          </div>
+
+          <span class="buy-all-btn is-disabled" aria-disabled="true">Will be available before the Spring 2027 semester
+            begins</span>
+        </div>
+
+        <!-- Semester 3 -->
+        <div class="semester-card">
+          <div class="semester-card-title">3rd Semester</div>
+          <span class="semester-card-tag">4 courses available</span>
+
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-213</span> — Digital Electronics &amp; Logic
+              Design</span>
+            <span class="course-buy-btn is-disabled" aria-disabled="true">Not Available</span>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-123</span> — Discrete Mathematics</span>
+            <span class="course-buy-btn is-disabled" aria-disabled="true">Not Available</span>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">MAT-102</span> — Math-II: Linear Algebra &amp; Fourier
+              Analysis</span>
+            <span class="course-buy-btn is-disabled" aria-disabled="true">Not Available</span>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-131</span> — Data Structure</span>
+            <span class="course-buy-btn is-disabled" aria-disabled="true">Not Available</span>
+          </div>
+
+          <span class="buy-all-btn is-disabled" aria-disabled="true">Will be available before the Spring 2027 semester
+            begins</span>
+        </div>
+
+        <!-- Semester 4 -->
+        <div class="semester-card">
+          <div class="semester-card-title">4th Semester</div>
+          <span class="semester-card-tag">4 courses available</span>
+
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-133</span> — Software Development Capstone
+              Project</span>
+            <span class="course-buy-btn is-disabled" aria-disabled="true">Not Available</span>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-223</span> — Database Systems</span>
+            <span class="course-buy-btn is-disabled" aria-disabled="true">Not Available</span>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-222</span> — Computer Architecture</span>
+            <span class="course-buy-btn is-disabled" aria-disabled="true">Not Available</span>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">AOL-101</span> — Art of Living</span>
+            <span class="course-buy-btn is-disabled" aria-disabled="true">Not Available</span>
+          </div>
+
+          <span class="buy-all-btn is-disabled" aria-disabled="true">Will be available before the Spring 2027 semester
+            begins</span>
+        </div>
+
+        <!-- Semester 5 -->
+        <div class="semester-card">
+          <div class="semester-card-title">5th Semester</div>
+          <span class="semester-card-tag">3 courses available</span>
+
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">STA-135 / STA-101</span> — Probability &amp; Statistics
+              in Software Engineering</span>
+            <span class="course-buy-btn is-disabled" aria-disabled="true">Not Available</span>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-214</span> — Algorithms Design &amp; Analysis</span>
+            <span class="course-buy-btn is-disabled" aria-disabled="true">Not Available</span>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-216</span> — Object Oriented Programming</span>
+            <span class="course-buy-btn is-disabled" aria-disabled="true">Not Available</span>
+          </div>
+
+          <span class="buy-all-btn is-disabled" aria-disabled="true">Will be available before the Spring 2027 semester
+            begins</span>
+        </div>
+
+        <!-- Semester 6 -->
+        <div class="semester-card">
+          <div class="semester-card-title">6th Semester</div>
+          <span class="semester-card-tag">4 courses available</span>
+
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">STA-135 / STA-101</span> — Probability &amp; Statistics
+              in Software Engineering</span>
+            <span class="course-buy-btn is-disabled" aria-disabled="true">Not Available</span>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-232</span> — Operating System &amp; System
+              Programming</span>
+            <span class="course-buy-btn is-disabled" aria-disabled="true">Not Available</span>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-231</span> — System Analysis &amp; Design Capstone
+              Project</span>
+            <span class="course-buy-btn is-disabled" aria-disabled="true">Not Available</span>
+          </div>
+          <div class="course-item">
+            <span class="course-name"><span class="course-code">SE-235</span> — Desktop &amp; Web Programming</span>
+            <span class="course-buy-btn is-disabled" aria-disabled="true">Not Available</span>
+          </div>
+
+          <span class="buy-all-btn is-disabled" aria-disabled="true">Will be available before the Spring 2027 semester
+            begins</span>
         </div>
 
         <!-- Semester 7-12 — coming soon -->
@@ -304,8 +774,8 @@
     <div class="semester-panel" id="panel-final">
 
       <div class="info-box">
-        You're viewing <strong>Final-term notes</strong>. Pick a course to buy individually, or grab the full semester
-        bundle.
+        You're viewing <strong>Final-term notes</strong>. Pick a course and tap <strong>See Notes Details</strong> to
+        check what's included before you purchase it.
       </div>
 
       <div class="semester-grid">
@@ -317,25 +787,26 @@
 
           <div class="course-item">
             <span class="course-name"><span class="course-code">SE-111</span> — Computer Fundamentals</span>
-            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+            <button type="button" class="course-buy-btn notes-details-btn" data-code="SE-111"
+              data-name="Computer Fundamentals">See Notes Details</button>
           </div>
           <div class="course-item">
             <span class="course-name"><span class="course-code">SE-113</span> — Introduction to Software
               Engineering</span>
-            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+            <button type="button" class="course-buy-btn notes-details-btn" data-code="SE-113"
+              data-name="Introduction to Software Engineering">See Notes Details</button>
           </div>
           <div class="course-item">
             <span class="course-name"><span class="course-code">ENG-101</span> — English Reading, Writing Skills &amp;
               Public Speaking</span>
-            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+            <button type="button" class="course-buy-btn notes-details-btn" data-code="ENG-101"
+              data-name="English Reading, Writing Skills &amp; Public Speaking">See Notes Details</button>
           </div>
           <div class="course-item">
             <span class="course-name"><span class="course-code">BNS-101</span> — Bangladesh Studies</span>
-            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+            <button type="button" class="course-buy-btn notes-details-btn" data-code="BNS-101"
+              data-name="Bangladesh Studies">See Notes Details</button>
           </div>
-
-          <a href="javascript:void(0)" class="buy-all-btn locked-note">Purchase all available courses for this
-            semester</a>
         </div>
 
         <!-- Semester 2 -->
@@ -345,20 +816,20 @@
 
           <div class="course-item">
             <span class="course-name"><span class="course-code">MAT-101</span> — Math-I: Calculus &amp; Geometry</span>
-            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+            <button type="button" class="course-buy-btn notes-details-btn" data-code="MAT-101"
+              data-name="Math-I: Calculus &amp; Geometry">See Notes Details</button>
           </div>
           <div class="course-item">
             <span class="course-name"><span class="course-code">SE-121</span> — Structured Programming</span>
-            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+            <button type="button" class="course-buy-btn notes-details-btn" data-code="SE-121"
+              data-name="Structured Programming">See Notes Details</button>
           </div>
           <div class="course-item">
             <span class="course-name"><span class="course-code">PHY-101</span> — Physics: Mechanics, Electromagnetism
               &amp; Waves</span>
-            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+            <button type="button" class="course-buy-btn notes-details-btn" data-code="PHY-101"
+              data-name="Physics: Mechanics, Electromagnetism &amp; Waves">See Notes Details</button>
           </div>
-
-          <a href="javascript:void(0)" class="buy-all-btn locked-note">Purchase all available courses for this
-            semester</a>
         </div>
 
         <!-- Semester 3 -->
@@ -369,24 +840,25 @@
           <div class="course-item">
             <span class="course-name"><span class="course-code">SE-213</span> — Digital Electronics &amp; Logic
               Design</span>
-            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+            <button type="button" class="course-buy-btn notes-details-btn" data-code="SE-213"
+              data-name="Digital Electronics &amp; Logic Design">See Notes Details</button>
           </div>
           <div class="course-item">
             <span class="course-name"><span class="course-code">SE-123</span> — Discrete Mathematics</span>
-            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+            <button type="button" class="course-buy-btn notes-details-btn" data-code="SE-123"
+              data-name="Discrete Mathematics">See Notes Details</button>
           </div>
           <div class="course-item">
             <span class="course-name"><span class="course-code">MAT-102</span> — Math-II: Linear Algebra &amp; Fourier
               Analysis</span>
-            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+            <button type="button" class="course-buy-btn notes-details-btn" data-code="MAT-102"
+              data-name="Math-II: Linear Algebra &amp; Fourier Analysis">See Notes Details</button>
           </div>
           <div class="course-item">
             <span class="course-name"><span class="course-code">SE-131</span> — Data Structure</span>
-            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+            <button type="button" class="course-buy-btn notes-details-btn" data-code="SE-131"
+              data-name="Data Structure">See Notes Details</button>
           </div>
-
-          <a href="javascript:void(0)" class="buy-all-btn locked-note">Purchase all available courses for this
-            semester</a>
         </div>
 
         <!-- Semester 4 -->
@@ -397,23 +869,24 @@
           <div class="course-item">
             <span class="course-name"><span class="course-code">SE-133</span> — Software Development Capstone
               Project</span>
-            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+            <button type="button" class="course-buy-btn notes-details-btn" data-code="SE-133"
+              data-name="Software Development Capstone Project">See Notes Details</button>
           </div>
           <div class="course-item">
             <span class="course-name"><span class="course-code">SE-223</span> — Database Systems</span>
-            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+            <button type="button" class="course-buy-btn notes-details-btn" data-code="SE-223"
+              data-name="Database Systems">See Notes Details</button>
           </div>
           <div class="course-item">
             <span class="course-name"><span class="course-code">SE-222</span> — Computer Architecture</span>
-            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+            <button type="button" class="course-buy-btn notes-details-btn" data-code="SE-222"
+              data-name="Computer Architecture">See Notes Details</button>
           </div>
           <div class="course-item">
             <span class="course-name"><span class="course-code">AOL-101</span> — Art of Living</span>
-            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+            <button type="button" class="course-buy-btn notes-details-btn" data-code="AOL-101"
+              data-name="Art of Living">See Notes Details</button>
           </div>
-
-          <a href="javascript:void(0)" class="buy-all-btn locked-note">Purchase all available courses for this
-            semester</a>
         </div>
 
         <!-- Semester 5 -->
@@ -424,19 +897,19 @@
           <div class="course-item">
             <span class="course-name"><span class="course-code">STA-135 / STA-101</span> — Probability &amp; Statistics
               in Software Engineering</span>
-            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+            <button type="button" class="course-buy-btn notes-details-btn" data-code="STA-135 / STA-101"
+              data-name="Probability &amp; Statistics in Software Engineering">See Notes Details</button>
           </div>
           <div class="course-item">
             <span class="course-name"><span class="course-code">SE-214</span> — Algorithms Design &amp; Analysis</span>
-            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+            <button type="button" class="course-buy-btn notes-details-btn" data-code="SE-214"
+              data-name="Algorithms Design &amp; Analysis">See Notes Details</button>
           </div>
           <div class="course-item">
             <span class="course-name"><span class="course-code">SE-216</span> — Object Oriented Programming</span>
-            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+            <button type="button" class="course-buy-btn notes-details-btn" data-code="SE-216"
+              data-name="Object Oriented Programming">See Notes Details</button>
           </div>
-
-          <a href="javascript:void(0)" class="buy-all-btn locked-note">Purchase all available courses for this
-            semester</a>
         </div>
 
         <!-- Semester 6 -->
@@ -447,25 +920,26 @@
           <div class="course-item">
             <span class="course-name"><span class="course-code">STA-135 / STA-101</span> — Probability &amp; Statistics
               in Software Engineering</span>
-            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+            <button type="button" class="course-buy-btn notes-details-btn" data-code="STA-135 / STA-101"
+              data-name="Probability &amp; Statistics in Software Engineering">See Notes Details</button>
           </div>
           <div class="course-item">
             <span class="course-name"><span class="course-code">SE-232</span> — Operating System &amp; System
               Programming</span>
-            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+            <button type="button" class="course-buy-btn notes-details-btn" data-code="SE-232"
+              data-name="Operating System &amp; System Programming">See Notes Details</button>
           </div>
           <div class="course-item">
             <span class="course-name"><span class="course-code">SE-231</span> — System Analysis &amp; Design Capstone
               Project</span>
-            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+            <button type="button" class="course-buy-btn notes-details-btn" data-code="SE-231"
+              data-name="System Analysis &amp; Design Capstone Project">See Notes Details</button>
           </div>
           <div class="course-item">
             <span class="course-name"><span class="course-code">SE-235</span> — Desktop &amp; Web Programming</span>
-            <a href="javascript:void(0)" class="course-buy-btn locked-note">Purchase this course only</a>
+            <button type="button" class="course-buy-btn notes-details-btn" data-code="SE-235"
+              data-name="Desktop &amp; Web Programming">See Notes Details</button>
           </div>
-
-          <a href="javascript:void(0)" class="buy-all-btn locked-note">Purchase all available courses for this
-            semester</a>
         </div>
 
         <!-- Semester 7-12 — coming soon -->
@@ -537,6 +1011,53 @@
     </section>
 
   </main>
+
+  <!-- Notes details popup (Final panel) -->
+  <div class="nd-overlay" id="notesDetailsOverlay" aria-hidden="true">
+    <div class="nd-modal" role="dialog" aria-modal="true" aria-labelledby="ndTitle">
+      <button type="button" class="nd-close" id="ndClose" aria-label="Close notes details">&times;</button>
+
+      <div class="nd-head">
+        <span class="nd-code" id="ndCode"></span>
+        <h2 class="nd-title" id="ndTitle"></h2>
+      </div>
+
+      <div class="nd-body">
+        <section class="nd-section">
+          <h3>What's Included with This Course?</h3>
+          <p>When you purchase this course, you'll get <span class="nd-hl">immediate access</span> to the existing
+            course notes, prepared from my own learning experience.</p>
+        </section>
+
+        <section class="nd-section">
+          <h3>Additional Resources <span class="nd-badge">Coming by December 2026</span></h3>
+          <p>You'll also receive <span class="nd-hl">4 additional resources</span> at <span class="nd-hl">no extra
+              cost</span>:</p>
+
+          <ol class="nd-list">
+            <li><strong>Final Exam Topics</strong>A focused list of topics to prepare for the final exam.</li>
+            <li><strong>Notes Coverage</strong>A clear overview of what is covered and what is not included in the
+              notes.</li>
+            <li><strong>Previous Semester Question Analysis</strong>An analysis of questions from previous semesters.
+            </li>
+            <li><strong>Visual Topic Analysis</strong>A visual breakdown of important and less important topics based
+              on previous semester questions.</li>
+          </ol>
+
+          <div class="nd-free">
+            All 4 additional resources are included <span class="nd-chip">FREE</span> with your course purchase. They
+            will be uploaded to your <span class="nd-hl">Google Drive</span> by the end of
+            <span class="nd-hl">December 2026</span>.
+          </div>
+        </section>
+      </div>
+
+      <div class="nd-foot">
+        <button type="button" class="nd-buy locked-note">Purchase This Course</button>
+        <p class="nd-foot-note">You are purchasing <strong id="ndBuyName"></strong> only.</p>
+      </div>
+    </div>
+  </div>
 
   <!-- Locked notice modal (Final panel purchase buttons) -->
   <div class="locked-modal-overlay" id="lockedModalOverlay">
@@ -617,6 +1138,60 @@
     document.getElementById('lockedModalOverlay').addEventListener('click', function (e) {
       if (e.target === this) this.classList.remove('active');
     });
+  </script>
+
+  <!-- Notes details popup logic -->
+  <script>
+      (function () {
+      var overlay = document.getElementById('notesDetailsOverlay');
+      // move the popup to <html> so no animation or transform on <body> can offset it
+      document.documentElement.appendChild(overlay);
+      var modal = overlay.querySelector('.nd-modal');
+      var closeBtn = document.getElementById('ndClose');
+      var codeEl = document.getElementById('ndCode');
+      var titleEl = document.getElementById('ndTitle');
+      var buyNameEl = document.getElementById('ndBuyName');
+      var lockedOverlay = document.getElementById('lockedModalOverlay');
+      var lastTrigger = null;
+
+      function openDetails(btn) {
+        lastTrigger = btn;
+        codeEl.textContent = btn.dataset.code;
+        titleEl.textContent = btn.dataset.name;
+        buyNameEl.textContent = btn.dataset.code + ' — ' + btn.dataset.name;
+        modal.querySelector('.nd-body').scrollTop = 0;
+        overlay.classList.add('open');
+        overlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        closeBtn.focus();
+      }
+
+      function closeDetails() {
+        overlay.classList.remove('open');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        if (lastTrigger) lastTrigger.focus();
+      }
+
+      document.querySelectorAll('.notes-details-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () { openDetails(btn); });
+      });
+
+      closeBtn.addEventListener('click', closeDetails);
+
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) closeDetails();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key !== 'Escape') return;
+        if (lockedOverlay.classList.contains('active')) {
+          lockedOverlay.classList.remove('active');
+        } else if (overlay.classList.contains('open')) {
+          closeDetails();
+        }
+      });
+    })();
   </script>
 
 </body>
