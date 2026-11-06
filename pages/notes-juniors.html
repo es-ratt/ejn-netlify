@@ -299,8 +299,13 @@
       border-radius: 0 0 22px 22px;
     }
 
+    /* Purchase This Course: link styled as a prominent button */
     .nd-buy {
+      display: block;
+      box-sizing: border-box;
       width: 100%;
+      text-align: center;
+      text-decoration: none;
       border: none;
       cursor: pointer;
       font-family: var(--font-body);
@@ -315,6 +320,7 @@
     }
 
     .nd-buy:hover {
+      color: #fff;
       background: var(--accent2);
       transform: translateY(-2px);
       box-shadow: 0 12px 28px rgba(22, 163, 74, 0.38);
@@ -1053,13 +1059,15 @@
       </div>
 
       <div class="nd-foot">
-        <button type="button" class="nd-buy locked-note">Purchase This Course</button>
+        <a class="nd-buy"
+          href="https://docs.google.com/forms/d/e/1FAIpQLScenIAagw9Sv98bIqwYglD9LgAn-xi3_l-_dOedd6onkkjUwQ/viewform?usp=dialog"
+          target="_blank" rel="noopener noreferrer">Purchase This Course</a>
         <p class="nd-foot-note">You are purchasing <strong id="ndBuyName"></strong> only.</p>
       </div>
     </div>
   </div>
 
-  <!-- Locked notice modal (Final panel purchase buttons) -->
+  <!-- Locked notice modal (kept for reference, no longer used by the Final panel) -->
   <div class="locked-modal-overlay" id="lockedModalOverlay">
     <div class="locked-modal">
       <div class="locked-modal-icon">⏳</div>
@@ -1117,12 +1125,10 @@
     });
   </script>
 
-  <!-- Final-panel purchase buttons: show "come again after mid" instead of opening the form -->
+  <!-- Locked modal logic (only runs for elements with the .locked-note class) -->
   <script>
     // capture phase (true) = runs BEFORE any click handler script.js may have
-    // attached to these buttons, and stopImmediatePropagation blocks script.js's
-    // handler from running afterwards — this prevents any old logic in script.js
-    // from hijacking the click on some buttons and not others.
+    // attached, and stopImmediatePropagation blocks script.js's handler afterwards.
     document.addEventListener('click', function (e) {
       var btn = e.target.closest('.locked-note');
       if (!btn) return;
@@ -1142,7 +1148,7 @@
 
   <!-- Notes details popup logic -->
   <script>
-      (function () {
+    (function () {
       var overlay = document.getElementById('notesDetailsOverlay');
       // move the popup to <html> so no animation or transform on <body> can offset it
       document.documentElement.appendChild(overlay);
